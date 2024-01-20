@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   
   get '/users', to: 'users#index'
-  # Other routes...
+  get '/current_user', to: 'users#current'
 
   # Reveal health status on /up
   get "up" => "rails/health#show", as: :rails_health_check

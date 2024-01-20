@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -29,10 +31,11 @@ function Login() {
         
             const data = await response.json();
             console.log('Login successful:', data);
-            // Additional actions after successful login
+            navigate('/')
+            
         } catch (error) {
             console.error('Login failed:', error);
-            // Handle login errors here
+            
         }
     };
 
