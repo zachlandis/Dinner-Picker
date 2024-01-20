@@ -6,12 +6,15 @@ import Login from './Login'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <div>
-        <Login />
+        <Router>
+          <Routes>
+            <Route path='/auth' element={<Login />} />
+          </Routes>
+        </Router>
       </div>
     </>
   )
