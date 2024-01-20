@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
+  respond_to :json
 
   # GET /resource/sign_in
   def new
@@ -11,8 +12,10 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super do |user|
-      if user
-        render json: { user: user, token: user.authentication_token }, status: :ok and return
+      if user.persisted?
+        render json: { user: user }, status: :ok and return
+      else
+        render json: { error: 'Invalid email or password' }, status: :unauthorized and return
       end
     end
   end
