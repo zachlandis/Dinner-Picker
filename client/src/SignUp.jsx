@@ -5,7 +5,9 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-    const registerUser = async (email, password, passwordConfirmation) => {
+    const registerUser = async (event) => {
+        event.preventDefault(); 
+
         const url = 'http://localhost:3000/users'; 
       
         try {
@@ -31,39 +33,44 @@ function SignUp() {
           const data = await response.json();
           console.log('Registration successful:', data);
           
+          
         } catch (error) {
           console.error('Registration failed:', error);
-        
+          
         }
-      };
+    };
       
-  return (
-    <div>
-        <form onSubmit={registerUser}>
-            <input
-                type='text'
-                name='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <br/>
-            <input
-                type='password'
-                name='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <br/>
-            <input
-                type='password'
-                name='password_confirmation'
-                value={passwordConfirmation}
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
-            />
-            <input type='submit' value='sign-up'/>
-        </form>
-    </div>
-  )
+    return (
+        <div>
+            <form onSubmit={registerUser}>
+                <input
+                    type='email'
+                    name='email'
+                    placeholder='Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <br/>
+                <input
+                    type='password'
+                    name='password'
+                    placeholder='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <br/>
+                <input
+                    type='password'
+                    name='password_confirmation'
+                    placeholder='Confirm Password'
+                    value={passwordConfirmation}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                />
+                <br/>
+                <input type='submit' value='sign-up'/>
+            </form>
+        </div>
+    )
 }
 
 export default SignUp
