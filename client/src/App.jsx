@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Home from './Home';
 import { UserContext } from './UserContext'; 
 import './App.css';
+import Logout from './Logout';
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(UserContext); 
@@ -42,7 +43,8 @@ function App() {
         <div>
           <Navbar onChangePage={setPage} />
           <Routes>
-            <Route path='/auth' element={<Login />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/' element={<Home />} />
           </Routes>

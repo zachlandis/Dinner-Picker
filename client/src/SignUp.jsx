@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+// import { UserContext } from './UserContext'
+
 
 function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
+    // const {currentUser} = useContext(UserContext)
+
+    // console.log(currentUser)
 
     const registerUser = async (event) => {
         event.preventDefault(); 
