@@ -32,49 +32,103 @@ function BuildProfile() {
         </div>
     ))
 
+    const preferredCuisines = [
+        "African",
+        "Asian",
+        "American",
+        "British",
+        "Cajun",
+        "Caribbean",
+        "Chinese",
+        "Eastern European",
+        "European",
+        "French",
+        "German",
+        "Greek",
+        "Indian",
+        "Irish",
+        "Italian",
+        "Japanese",
+        "Jewish",
+        "Korean",
+        "Latin American",
+        "Mediterranean",
+        "Mexican",
+        "Middle Eastern",
+        "Nordic",
+        "Southern",
+        "Spanish",
+        "Thai",
+        "Vietnamese"]
 
-  return (
-    <div>
-        <h1>Welcome to Dinner Picker</h1>
-        <p>We totally get it - you love cooking, but the daily "what's for dinner?" question can feel like a daunting task. That's where we step in to spice things up! But first, let's collect some info to make sure we're only suggesting the dinners that are right for you.</p>
-        <form>
-            <label><strong>Your Name: </strong></label>
+    const mappedPreferredCuisines = preferredCuisines.map((cuisine) => (
+        <div>
             <input
-                type='text'
-                name='name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                type='checkbox'
+                value={cuisine}
             />
-            <br/>
-            <label><strong>Year of Birth: </strong></label>
-            <select
-                name='yearOfBirth'
-                value={yearOfBirth}
-                onChange={(e) => setYearOfBirth(e.target.value)}
-            >
-                <option value="">Year of Birth</option>
-                {years.map((year) => (
-                    <option key={year} value={year}>
-                        {year}
-                    </option>
-                ))}
-            </select>
+            <label>{cuisine}</label>
+        </div>
+    ))
 
-            <br/>
-            <br/>
 
-            <label><strong>Your Diet(s): </strong></label>
-            <div>
-                {mappedDiets}
-            </div>
-            <br/>
-            <label><strong>Intolerances</strong></label>
-            <div>
-                {mappedIntolerances}
-            </div>
-        </form>
-    </div>
-  )
+    return (
+        <div className="build-profile">
+            <h1>Welcome to Dinner Picker</h1>
+            <p>We totally get it - you love cooking, but the daily "what's for dinner?" question can feel like a daunting task. That's where we step in to spice things up! But first, let's collect some info to make sure we're only suggesting the dinners that are right for you.</p>
+            
+            <form className="profile-form">
+                <div className="form-group">
+                    <label><strong>Your Name: </strong></label>
+                    <input
+                        type='text'
+                        name='name'
+                        className="form-control"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label><strong>Year of Birth: </strong></label>
+                    <select
+                        name='yearOfBirth'
+                        className="form-control"
+                        value={yearOfBirth}
+                        onChange={(e) => setYearOfBirth(e.target.value)}
+                    >
+                        <option value="">Year of Birth</option>
+                        {years.map((year) => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="checkbox-group">
+                    <label><strong>Your Diet(s): </strong></label>
+                    <div className="checkbox-items">
+                        {mappedDiets}
+                    </div>
+                </div>
+
+                <div className="checkbox-group">
+                    <label><strong>Intolerances: </strong></label>
+                    <div className="checkbox-items">
+                        {mappedIntolerances}
+                    </div>
+                </div>
+
+                <div className="checkbox-group">
+                    <label><strong>Preferred Cuisines: </strong></label>
+                    <div className="checkbox-items">
+                        {mappedPreferredCuisines}
+                    </div>
+                </div>
+            </form>
+        </div>
+    );
 }
 
-export default BuildProfile
+export default BuildProfile;
