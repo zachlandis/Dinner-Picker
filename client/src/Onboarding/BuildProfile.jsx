@@ -8,6 +8,30 @@ function BuildProfile() {
     const startYear = 1920;
     const years = Array.from(new Array(currentYear - startYear + 1), (val, index) => currentYear - index);
 
+    const diets = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
+
+    const mappedDiets = diets.map((diet) => (
+        <div>
+            <input
+                type='checkbox'
+                value={diet}
+            />
+            <label>{diet}</label>
+        </div>
+    ))
+
+    const intolerances = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat"]
+
+    const mappedIntolerances = intolerances.map((intolerance) => (
+        <div>
+            <input
+                type='checkbox'
+                name={intolerance}
+            />
+            <label>{intolerance}</label>
+        </div>
+    ))
+
 
   return (
     <div>
@@ -28,7 +52,7 @@ function BuildProfile() {
                 value={yearOfBirth}
                 onChange={(e) => setYearOfBirth(e.target.value)}
             >
-                <option value="">Select Year of Birth</option>
+                <option value="">Year of Birth</option>
                 {years.map((year) => (
                     <option key={year} value={year}>
                         {year}
@@ -38,75 +62,16 @@ function BuildProfile() {
 
             <br/>
             <br/>
-            
+
             <label><strong>Your Diet(s): </strong></label>
+            <div>
+                {mappedDiets}
+            </div>
             <br/>
-            <input
-                type='checkbox'
-                value='Gluten Free'
-            />
-            <label>Gluten Free</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Ketogenic'
-            />
-            <label>Ketogenic</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Vegetarian'
-            />
-            <label>Vegetarian</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Lacto-Vegetarian'
-            />
-            <label>Lacto-Vegetarian</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Ovo-Vegetarian'
-            />
-            <label>Ovo-Vegetarian</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Vegan'
-            />
-            <label>Vegan</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Pescetarian'
-            />
-            <label>Pescetarian</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Paleo'
-            />
-            <label>Paleo</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Primal'
-            />
-            <label>Primal</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Low FODMAP'
-            />
-            <label>Low FODMAP</label>
-            <br/>
-            <input
-                type='checkbox'
-                value='Whole30'
-            />
-            <label>Whole30</label>
-            <br/>
+            <label><strong>Intolerances</strong></label>
+            <div>
+                {mappedIntolerances}
+            </div>
         </form>
     </div>
   )
