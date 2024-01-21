@@ -11,8 +11,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    build_resource(sign_up_params)
+
+    resource.save
+    yield resource if block_given?
+
+    if resource.persisted?
+      if resource.active_for_authentication?
+        sign_up(resource_name, resource)
+        render json: { user: resource.as_json(except: [:encrypted_password]) }, status: :created
+      else
+        expire_data_after_sign_in!
+        render json: { message: "signed up but #{resource.inactive_message}" }, status: :ok
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
+    end
   end
+
   
   # GET /resource/edit
   # def edit
@@ -42,7 +60,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :password, :password_confirmation])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

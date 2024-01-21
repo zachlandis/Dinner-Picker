@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <div>
-        <h1>Welcome, {currentUser.email}!</h1>
+        <h1>Welcome, {currentUser.username}!</h1>
     </div>
   )
 }

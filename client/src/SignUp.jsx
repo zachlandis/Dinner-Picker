@@ -1,14 +1,13 @@
 import React, { useState, useContext } from 'react'
-// import { UserContext } from './UserContext'
+import { useNavigate } from 'react-router'
 
 
 function SignUp() {
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    // const {currentUser} = useContext(UserContext)
-
-    // console.log(currentUser)
+    const navigate = useNavigate();
 
     const registerUser = async (event) => {
         event.preventDefault(); 
@@ -25,6 +24,7 @@ function SignUp() {
             body: JSON.stringify({
               user: {
                 email: email,
+                username: username,
                 password: password,
                 password_confirmation: passwordConfirmation 
               }
@@ -37,6 +37,8 @@ function SignUp() {
       
           const data = await response.json();
           console.log('Registration successful:', data);
+          navigate('/login');
+          
           
           
         } catch (error) {
@@ -54,6 +56,14 @@ function SignUp() {
                     placeholder='Email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                />
+                <br/>
+                <input
+                  type='text'
+                  name='username'
+                  placeholder='Username'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <br/>
                 <input
