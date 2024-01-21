@@ -32,7 +32,7 @@ function Login() {
         
             const data = await response.json();
             console.log('Login successful:', data);
-            navigate('/')
+            navigate('/onboarding')
             
         } catch (error) {
             console.error('Login failed:', error);

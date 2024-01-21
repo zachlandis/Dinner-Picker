@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import SignUp from './SignUp';
+import Login from './Auth/Login';
+import Logout from './Auth/Logout';
+import SignUp from './Auth/SignUp';
 import Navbar from './Navbar';
 import Home from './Home';
 import { UserContext } from './UserContext'; 
 import './App.css';
-import Logout from './Logout';
+import BuildProfile from './Onboarding/BuildProfile';
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(UserContext); 
@@ -44,6 +45,7 @@ function App() {
           <Navbar onChangePage={setPage} />
           <Routes>
             <Route path='/login' element={<Login />} />
+            <Route path='/onboarding' element={<BuildProfile />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/' element={<Home />} />
