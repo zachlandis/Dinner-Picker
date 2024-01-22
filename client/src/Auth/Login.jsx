@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router';
+import { UserContext } from '../UserContext';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { currentUser, setCurrentUser } = useContext(UserContext)
     const navigate = useNavigate();
 
     const loginUser = async (e) => {
@@ -31,9 +33,10 @@ function Login() {
             }
         
             const data = await response.json();
+            navigate('/profile')
+            setCurrentUser(data.user)
             console.log('Login successful:', data);
-            navigate('/onboarding')
-            
+            localStorage.setItem('currentUser', JSON.stringify(user)); 
         } catch (error) {
             console.error('Login failed:', error);
             

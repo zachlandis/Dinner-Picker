@@ -66,6 +66,18 @@ p {
   margin-bottom: 30px;
 }
 
+/* NAVBAR */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*PROFILE*/
+
 .profile-page {
   font-family: Arial, sans-serif;
   max-width: 600px;
@@ -89,8 +101,8 @@ p {
 
 .profile-section {
   margin-top: 20px;
-  max-height: 150px; /* Maximum height for the scrollable area */
-  overflow-y: auto; /* Adds a vertical scrollbar if content exceeds the max-height */
+  max-height: 150px; 
+  overflow-y: auto; 
 }
 
 .profile-item {
@@ -105,4 +117,6 @@ p {
   margin-top: 10px;
 }
 
-/* Adjustments for
+.navbar {
+  float: right;
+}

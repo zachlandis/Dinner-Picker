@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 function Logout() {
     const navigate = useNavigate();
+    const { currentUser } = useContext(UserContext);
 
     const performLogout = async () => {
         try {
@@ -12,8 +14,7 @@ function Logout() {
             });
 
             if(response.ok) {
-                console.log("Logout successful");
-                
+                console.log("Logout successful. Current User: ", currentUser);
                 navigate('/login');
             } else {
                 console.log("Logout failed");
@@ -22,7 +23,9 @@ function Logout() {
             console.error('Error during logout:', error);
         }
     };
-
+    
+    localStorage.removeItem('currentUser');
+    console.log("Post-logout: ", currentUser)
     performLogout(); 
 
     return <div>Logging out...</div>;

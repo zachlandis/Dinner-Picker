@@ -1,11 +1,9 @@
 import React, { useContext } from 'react'
-import { UserContext } from './UserContext'
+// import { UserContext } from './UserContext'
 
 
-function Profile() {
-  const { currentUser } = useContext(UserContext);
-
-  console.log("CurrentUser: ", currentUser)
+function Profile({ currentUser }) {
+  // const { currentUser } = useContext(UserContext);
 
     const mapItems = (items) => {
       return items.map((item, index) => (
