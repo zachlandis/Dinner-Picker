@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { diets, intolerances, preferredCuisines } from './profileOptions'
 import { useNavigate } from 'react-router';
+import { UserContext } from '../UserContext';
 
 
-function BuildProfile({ currentUser }) {
+function BuildProfile() {
     const [profileIntolerances, setProfileIntolerances] = useState([]);
     const [profileDiets, setProfileDiets] = useState([])
     const [profilePreferredCuisines, setProfilePreferredCuisines] = useState([])
+    const {currentUser, setCurrentUser} = useContext(UserContext)
     const navigate = useNavigate();
 
     const handleCheckboxChange = (option, setterFunction, currentState) => {
@@ -18,7 +20,6 @@ function BuildProfile({ currentUser }) {
         } else {
             newChecked.splice(currentIndex, 1);
         }
-    
         setterFunction(newChecked);
     };
     
@@ -38,7 +39,6 @@ function BuildProfile({ currentUser }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        // const url = `http://localhost:3000/users/${currentUser.id}`
         const url = 'http://localhost:3000/update_user'
         
         try {
@@ -64,31 +64,29 @@ function BuildProfile({ currentUser }) {
         
             const data = await response.json();
             console.log('Update successful:', data);
+            await refetchCurrentUser();
             navigate('/')
             
         } catch (error) {
-            console.error('Update failed:', error);
-            
+            console.error('Update failed:', error);   
         }
+    }
 
-
-
+    async function refetchCurrentUser() {
+        const response = await fetch('http://localhost:3000/current_user', {
+            credentials: 'include'
+        });
+        if (response.ok) {
+            const updatedUser = await response.json();
+            setCurrentUser(updatedUser)
+        }
     }
     
 
     const mappedDiets = mappedOptions(diets, setProfileDiets, profileDiets);
     const mappedIntolerances = mappedOptions(intolerances, setProfileIntolerances, profileIntolerances);
     const mappedPreferredCuisines = mappedOptions(preferredCuisines, setProfilePreferredCuisines, profilePreferredCuisines);
-
-
-    useEffect(() => {
-        console.log("Current User 2: ", currentUser)
-        console.log("Profile Diets: ", profileDiets);
-        console.log("Profile Intolerances: ", profileIntolerances);
-        console.log("Profile Cuisines: ", profilePreferredCuisines)
-    })
-
-
+    
     return (
         <div className="build-profile">
             <h1>Welcome to Dinner Picker</h1>

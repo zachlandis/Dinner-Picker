@@ -17,18 +17,24 @@ function App() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch('http://localhost:3000/current_user', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          credentials: 'include'
-        });
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+          setCurrentUser(JSON.parse(storedUser));
+        } else {
+          const response = await fetch('http://localhost:3000/current_user', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            credentials: 'include'
+          });
 
-        if (response.ok) {
-          const user = await response.json();
-          console.log("Fetched user:", user); 
-          setCurrentUser(user);
+          if (response.ok) {
+            const user = await response.json();
+            console.log("Fetched user:", user); 
+            setCurrentUser(user);
+            localStorage.setItem('currentUser', JSON.stringify(user)); 
+          }
         }
       } catch (error) {
         console.error('Failed to fetch current user:', error);
@@ -51,7 +57,7 @@ function App() {
             <Route path='/recipes' element={<RecipeCollection />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home currentUser={currentUser}/>} />
           </Routes>
         </div>
       </Router>
