@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { diets, intolerances, preferredCuisines } from './profileOptions'
 
 function BuildProfile() {
     const [name, setName] = useState('');
@@ -7,8 +8,6 @@ function BuildProfile() {
     const currentYear = new Date().getFullYear();
     const startYear = 1920;
     const years = Array.from(new Array(currentYear - startYear + 1), (val, index) => currentYear - index);
-
-    const diets = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
 
     const mappedDiets = diets.map((diet) => (
         <div>
@@ -20,8 +19,6 @@ function BuildProfile() {
         </div>
     ))
 
-    const intolerances = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat"]
-
     const mappedIntolerances = intolerances.map((intolerance) => (
         <div>
             <input
@@ -31,35 +28,6 @@ function BuildProfile() {
             <label>{intolerance}</label>
         </div>
     ))
-
-    const preferredCuisines = [
-        "African",
-        "Asian",
-        "American",
-        "British",
-        "Cajun",
-        "Caribbean",
-        "Chinese",
-        "Eastern European",
-        "European",
-        "French",
-        "German",
-        "Greek",
-        "Indian",
-        "Irish",
-        "Italian",
-        "Japanese",
-        "Jewish",
-        "Korean",
-        "Latin American",
-        "Mediterranean",
-        "Mexican",
-        "Middle Eastern",
-        "Nordic",
-        "Southern",
-        "Spanish",
-        "Thai",
-        "Vietnamese"]
 
     const mappedPreferredCuisines = preferredCuisines.map((cuisine) => (
         <div>
@@ -126,6 +94,7 @@ function BuildProfile() {
                         {mappedPreferredCuisines}
                     </div>
                 </div>
+                <input type='submit' value='Create Your Profile'/>
             </form>
         </div>
     );
