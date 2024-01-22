@@ -43,22 +43,6 @@ function BuildProfile() {
                     />
                 </div>
 
-                <div className="form-group">
-                    <label><strong>Year of Birth: </strong></label>
-                    <select
-                        name='yearOfBirth'
-                        className="form-control"
-                        value={yearOfBirth}
-                        onChange={(e) => setYearOfBirth(e.target.value)}
-                    >
-                        <option value="">Year of Birth</option>
-                        {years.map((year) => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                </div>
 
                 <div className="checkbox-group">
                     <label><strong>Your Diet(s): </strong></label>
