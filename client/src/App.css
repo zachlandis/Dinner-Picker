@@ -68,10 +68,10 @@ p {
 
 .profile-page {
   font-family: Arial, sans-serif;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
@@ -89,6 +89,8 @@ p {
 
 .profile-section {
   margin-top: 20px;
+  max-height: 150px; /* Maximum height for the scrollable area */
+  overflow-y: auto; /* Adds a vertical scrollbar if content exceeds the max-height */
 }
 
 .profile-item {
@@ -102,3 +104,5 @@ p {
 .profile-list {
   margin-top: 10px;
 }
+
+/* Adjustments for

@@ -65,7 +65,7 @@ function BuildProfile() {
             const data = await response.json();
             console.log('Update successful:', data);
             await refetchCurrentUser();
-            navigate('/')
+            navigate('/profile')
             
         } catch (error) {
             console.error('Update failed:', error);   

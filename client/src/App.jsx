@@ -4,7 +4,7 @@ import Login from './Auth/Login';
 import Logout from './Auth/Logout';
 import SignUp from './Auth/SignUp';
 import Navbar from './Navbar';
-import Home from './Home';
+import Profile from './Profile';
 import { UserContext } from './UserContext'; 
 import './App.css';
 import BuildProfile from './Onboarding/BuildProfile';
@@ -57,7 +57,7 @@ function App() {
             <Route path='/recipes' element={<RecipeCollection />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />
-            <Route path='/' element={<Home currentUser={currentUser}/>} />
+            <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
           </Routes>
         </div>
       </Router>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from './UserContext'
 
 
-function Home() {
+function Profile() {
   const { currentUser } = useContext(UserContext);
 
   console.log("CurrentUser: ", currentUser)
@@ -45,4 +45,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Profile
