@@ -9,35 +9,21 @@ function BuildProfile() {
     const startYear = 1920;
     const years = Array.from(new Array(currentYear - startYear + 1), (val, index) => currentYear - index);
 
-    const mappedDiets = diets.map((diet) => (
-        <div>
-            <input
-                type='checkbox'
-                value={diet}
-            />
-            <label>{diet}</label>
-        </div>
-    ))
+    const mappedOptions = (options) => {
+        return options.map((option) => (
+            <div>
+                <input
+                    type='checkbox'
+                    value={option}
+                />
+                <label>{option}</label>
+            </div>
+        ))
+    }
 
-    const mappedIntolerances = intolerances.map((intolerance) => (
-        <div>
-            <input
-                type='checkbox'
-                name={intolerance}
-            />
-            <label>{intolerance}</label>
-        </div>
-    ))
-
-    const mappedPreferredCuisines = preferredCuisines.map((cuisine) => (
-        <div>
-            <input
-                type='checkbox'
-                value={cuisine}
-            />
-            <label>{cuisine}</label>
-        </div>
-    ))
+    const mappedDiets = mappedOptions(diets);
+    const mappedIntolerances = mappedOptions(intolerances);
+    const mappedPreferredCuisines = mappedOptions(preferredCuisines);
 
 
     return (
