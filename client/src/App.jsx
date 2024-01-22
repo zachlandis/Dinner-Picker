@@ -27,6 +27,7 @@ function App() {
 
         if (response.ok) {
           const user = await response.json();
+          console.log("Fetched user:", user); 
           setCurrentUser(user);
         }
       } catch (error) {
@@ -46,7 +47,7 @@ function App() {
           <Navbar onChangePage={setPage} />
           <Routes>
             <Route path='/login' element={<Login />} />
-            <Route path='/onboarding' element={<BuildProfile />} />
+            <Route path='/onboarding' element={<BuildProfile currentUser={currentUser}/>} />
             <Route path='/recipes' element={<RecipeCollection />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />
