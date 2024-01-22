@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { diets, intolerances, preferredCuisines } from './profileOptions'
+import { UserContext } from '../UserContext';
 
 function BuildProfile() {
-    const [name, setName] = useState('');
     const [profileIntolerances, setProfileIntolerances] = useState([]);
     const [profileDiets, setProfileDiets] = useState([])
     const [profilePreferredCuisines, setProfilePreferredCuisines] = useState([])
+    const { currentUser } = useContext(UserContext);
 
     const currentYear = new Date().getFullYear();
     const startYear = 1920;
@@ -37,6 +38,19 @@ function BuildProfile() {
             </div>
         ));
     };
+
+    // function handleSubmit(e) {
+    //     e.preventDefault();
+
+    //     const profileData = {
+            
+    //         dietary_restrictions: profileDiets,
+    //         intolerances: profileIntolerances,
+    //         preferredCuisines: profilePreferredCuisines,
+    //     }
+
+
+    // }
     
 
     const mappedDiets = mappedOptions(diets, setProfileDiets, profileDiets);
@@ -45,6 +59,7 @@ function BuildProfile() {
 
 
     useEffect(() => {
+        console.log("Current User: ", currentUser)
         console.log("Profile Diets: ", profileDiets);
         console.log("Profile Intolerances: ", profileIntolerances);
         console.log("Profile Cuisines: ", profilePreferredCuisines)
@@ -57,18 +72,6 @@ function BuildProfile() {
             <p>We totally get it - you love cooking, but the daily "what's for dinner?" question can feel like a daunting task. That's where we step in to spice things up! But first, let's collect some info to make sure we're only suggesting the dinners that are right for you.</p>
             
             <form className="profile-form">
-                <div className="form-group">
-                    <label><strong>Your Name: </strong></label>
-                    <input
-                        type='text'
-                        name='name'
-                        className="form-control"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-
-
                 <div className="checkbox-group">
                     <label><strong>Your Diet(s): </strong></label>
                     <div className="checkbox-items">

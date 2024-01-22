@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   registrations: 'users/registrations'
 }
 
-  
+  # resource :users
   get '/users', to: 'users#index'
+  
   get '/current_user', to: 'users#current'
 
   # Reveal health status on /up
