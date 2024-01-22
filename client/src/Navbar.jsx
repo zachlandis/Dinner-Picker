@@ -15,7 +15,7 @@ function Navbar() {
   return (
     <div className='navbar'>
         <div className='nav-container'>
-            {currentUser 
+            {currentUser && Object.keys(currentUser).length !== 0
               ? 
               <Link to="/logout">Sign Out</Link>
               :

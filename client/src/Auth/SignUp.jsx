@@ -48,7 +48,7 @@ function SignUp() {
     };
       
     return (
-        <div>
+        <div className="profile-form">
             <form onSubmit={registerUser}>
                 <input
                     type='email'

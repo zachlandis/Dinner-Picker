@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { UserContext } from '../UserContext';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { setCurrentUser } = useContext(UserContext)
     const navigate = useNavigate();
 
     const loginUser = async (e) => {
@@ -44,7 +44,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className="profile-form">
             <form onSubmit={loginUser}>
                 <input
                     type='email'

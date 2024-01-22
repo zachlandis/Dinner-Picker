@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 function Logout() {
     const navigate = useNavigate();
-    const { currentUser } = useContext(UserContext);
-
+    const { setCurrentUser } = useContext(UserContext);
+    
     const performLogout = async () => {
         try {
             const response = await fetch('http://localhost:3000/users/sign_out', {
@@ -14,7 +14,9 @@ function Logout() {
             });
 
             if(response.ok) {
-                console.log("Logout successful. Current User: ", currentUser);
+                console.log("Logout successful");
+                localStorage.removeItem('currentUser');
+                setCurrentUser({}); 
                 navigate('/login');
             } else {
                 console.log("Logout failed");
@@ -23,10 +25,10 @@ function Logout() {
             console.error('Error during logout:', error);
         }
     };
-    
-    localStorage.removeItem('currentUser');
-    console.log("Post-logout: ", currentUser)
-    performLogout(); 
+
+    useEffect(() => {
+        performLogout();
+    }, []);
 
     return <div>Logging out...</div>;
 }

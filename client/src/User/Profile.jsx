@@ -13,8 +13,6 @@ function Profile({ currentUser }) {
       ))
     }
 
-    
-
     const mappedIntolerances = mapItems(currentUser.intolerances)
     const mappedPreferredCuisines = mapItems(currentUser.preferredCuisines)
     const mapppedDiets = mapItems(currentUser.dietary_restrictions)
@@ -27,18 +25,34 @@ function Profile({ currentUser }) {
   return (
     <div className="profile-page">
       <h1 className="profile-header">Welcome, {currentUser.username}!</h1>
-      <div className="profile-section">
-        <h3 className="section-header">Intolerances</h3>
-        <div className="profile-list">{mappedIntolerances}</div>
-      </div>
-      <div className="profile-section">
-        <h3 className="section-header">Diets</h3>
-        <div className="profile-list">{mapppedDiets}</div>
-      </div>
-      <div className="profile-section">
-        <h3 className="section-header">Preferred Cuisines</h3>
-        <div className="profile-list">{mappedPreferredCuisines}</div>
-      </div>
+      <table className='profile-table'>
+        <thead>
+          <tr>
+            <th>Intolerances</th>
+            <th>Diets</th>
+            <th>Preferred Cuisines</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div className="profile-section">
+              {mappedIntolerances}
+              </div>
+            </td>
+            <td>
+              <div className="profile-section">
+              {mapppedDiets}
+              </div>
+            </td>
+            <td>
+              <div className="profile-section">
+              {mappedPreferredCuisines}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
    </div> 
   )
 }

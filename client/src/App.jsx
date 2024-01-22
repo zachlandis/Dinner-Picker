@@ -4,7 +4,7 @@ import Login from './Auth/Login';
 import Logout from './Auth/Logout';
 import SignUp from './Auth/SignUp';
 import Navbar from './Navbar';
-import Profile from './Profile';
+import Profile from './User/Profile';
 import { UserContext } from './UserContext'; 
 import './App.css';
 import BuildProfile from './Onboarding/BuildProfile';
