@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 import Profile from './User/Profile';
 import { UserContext } from './UserContext'; 
 import './App.css';
-import BuildProfile from './Onboarding/BuildProfile';
+import EditProfile from './User/EditProfile';
 import RecipeCollection from './Dinners/RecipeCollection';
 
 function App() {
@@ -50,15 +50,19 @@ function App() {
     <>
       <Router>
         <div>
-          <Navbar onChangePage={setPage} />
-          <Routes>
-            <Route path='/login' element={<Login />} />
-            <Route path='/edit-profile' element={<BuildProfile currentUser={currentUser}/>} />
-            <Route path='/recipes' element={<RecipeCollection />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/signup' element={<SignUp />} />
-            <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
-          </Routes>
+          <div>
+            <Navbar onChangePage={setPage} />
+          </div>
+          <div>
+            <Routes>
+              <Route path='/login' element={<Login />} />
+              <Route path='/edit-profile' element={<EditProfile currentUser={currentUser}/>} />
+              <Route path='/recipes' element={<RecipeCollection />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/signup' element={<SignUp />} />
+              <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
+            </Routes>
+          </div>
         </div>
       </Router>
     </>

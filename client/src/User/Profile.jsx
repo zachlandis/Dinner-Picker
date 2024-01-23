@@ -1,21 +1,18 @@
-import React from 'react'
-// import { UserContext } from './UserContext'
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import { useNavigate } from 'react-router';
 
+function Profile() {
+  const { currentUser } = useContext(UserContext)
+  const navigate = useNavigate();
 
-function Profile({ currentUser }) {
-  // const { currentUser } = useContext(UserContext);
+  const listItems = (items) => {
+    return items.join(', ')
+  }
 
-    const mapItems = (items) => {
-      return items.map((item, index) => (
-        <div key={index} className="profile-item">
-          <h4>{item}</h4>
-        </div>
-      ))
-    }
-
-    const mappedIntolerances = mapItems(currentUser.intolerances)
-    const mappedPreferredCuisines = mapItems(currentUser.preferredCuisines)
-    const mapppedDiets = mapItems(currentUser.dietary_restrictions)
+    const mappedIntolerances = listItems(currentUser.intolerances)
+    const mappedPreferredCuisines = listItems(currentUser.preferredCuisines)
+    const mapppedDiets = listItems(currentUser.dietary_restrictions)
 
   
     if(!currentUser) {
@@ -24,34 +21,28 @@ function Profile({ currentUser }) {
 
   return (
     <div className="profile-page">
-      <h1 className="profile-header">Welcome, {currentUser.username}!</h1>
+      <h1 className="profile-header">{currentUser.username}</h1>
       <table className='profile-table'>
-        <thead>
-          <tr>
-            <th>Intolerances</th>
-            <th>Diets</th>
-            <th>Preferred Cuisines</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div className="profile-section">
-              {mappedIntolerances}
-              </div>
-            </td>
-            <td>
-              <div className="profile-section">
-              {mapppedDiets}
-              </div>
-            </td>
-            <td>
-              <div className="profile-section">
-              {mappedPreferredCuisines}
-              </div>
-            </td>
-          </tr>
-        </tbody>
+        <tr>
+          <div className='edit-profile-button'>
+           <button onClick={() => navigate('/edit-profile')}>Edit Profile</button>
+        </div>
+        </tr>
+        <tr>
+          <td className='profile-cell'>
+              <p><strong>Diets: </strong>{mapppedDiets}</p>
+              <p><strong>Intolerances: </strong>{mappedIntolerances}</p>
+              <p><strong>Preferred Cuisines: </strong>{mappedPreferredCuisines}</p>
+          </td>
+          <td className='profile-cell'>
+            <h3>This Week's Dinners</h3>
+            <ul>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+            </ul>
+          </td>
+        </tr>
       </table>
    </div> 
   )

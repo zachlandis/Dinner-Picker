@@ -17,7 +17,13 @@ function Navbar() {
         <div className='nav-container'>
             {currentUser && Object.keys(currentUser).length !== 0
               ? 
-              <Link to="/logout">Sign Out</Link>
+              <div>
+                <Link to="/profile">Profile</Link>
+                <br/>
+                <Link to="/recipes">Recipes</Link>
+                <br/>
+                <Link to="/logout">Sign Out</Link>
+              </div>
               :
               <div>
                 {!isCurrentRoute('/login') && <Link to="/login">Sign In</Link>}

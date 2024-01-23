@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { UserContext } from '../UserContext';
 
 
-function BuildProfile() {
+function EditProfile() {
     const [profileIntolerances, setProfileIntolerances] = useState([]);
     const [profileDiets, setProfileDiets] = useState([])
     const [profilePreferredCuisines, setProfilePreferredCuisines] = useState([])
@@ -119,4 +119,4 @@ function BuildProfile() {
     );
 }
 
-export default BuildProfile;
+export default EditProfile;
