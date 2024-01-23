@@ -53,7 +53,7 @@ function App() {
           <Navbar onChangePage={setPage} />
           <Routes>
             <Route path='/login' element={<Login />} />
-            <Route path='/onboarding' element={<BuildProfile currentUser={currentUser}/>} />
+            <Route path='/edit-profile' element={<BuildProfile currentUser={currentUser}/>} />
             <Route path='/recipes' element={<RecipeCollection />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />

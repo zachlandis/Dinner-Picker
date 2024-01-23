@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router';
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { setCurrentUser } = useContext(UserContext)
     const navigate = useNavigate();
+    const { setCurrentUser } = useContext(UserContext); 
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -33,18 +33,23 @@ function Login() {
             }
         
             const data = await response.json();
-            navigate('/profile')
-            setCurrentUser(data.user)
-            console.log('Login successful:', data);
-            localStorage.setItem('currentUser', JSON.stringify(user)); 
+            console.log("From Login", data.user)
+            setCurrentUser(data.user);
+
+            
+            if (data.user.sign_in_count === 2) {
+                navigate('/edit-profile'); 
+            } else {
+                navigate('/profile');
+            }
+            
         } catch (error) {
             console.error('Login failed:', error);
-            
         }
     };
 
     return (
-        <div className="profile-form">
+        <div>
             <form onSubmit={loginUser}>
                 <input
                     type='email'
@@ -60,11 +65,10 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-
                 <input type="submit" value="Login" />
             </form>
         </div>
-    )
+    );
 }
 
 export default Login;

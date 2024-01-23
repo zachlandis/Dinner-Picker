@@ -2,13 +2,22 @@ class UsersController < ApplicationController
     before_action :authenticate_user!, only: [:current, :update]
 
     def index
-        users = User.all
-        render json: users
+        @users = User.all
+        render json: @users
     end
 
     def current
         if current_user
-            render json: current_user
+            render json: {
+            id: current_user.id,
+            username: current_user.username,
+            email: current_user.email,
+            sign_in_count: current_user.sign_in_count,
+            dietary_restrictions: current_user.dietary_restrictions,
+            intolerances: current_user.intolerances,
+            preferredCuisines: current_user.preferredCuisines,
+            dinner_wishlist: current_user.dinner_wishlist
+            }
         else
             render json: { error: 'Not authenticated' }, status: :unauthorized
         end

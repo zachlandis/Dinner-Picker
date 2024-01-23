@@ -13,13 +13,17 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     user = User.find_by(email: params[:user][:email])
-      if user&.valid_password?(params[:user][:password])
-        sign_in :user, user
-        render json: { success: true, user: user.as_json }, status: :ok
-      else
-        render json: { success: false, error: 'Invalid email or password' }, status: :unauthorized
-      end
+    if user&.valid_password?(params[:user][:password])
+      sign_in :user, user
+      render json: { 
+        success: true, 
+        user: user.as_json(only: [:id, :username, :email, :sign_in_count, :dietary_restrictions, :intolerances, :preferredCuisines, :dinner_wishlist]) 
+      }, status: :ok
+    else
+      render json: { success: false, error: 'Invalid email or password' }, status: :unauthorized
+    end
   end
+  
   
 
   # DELETE /resource/sign_out
