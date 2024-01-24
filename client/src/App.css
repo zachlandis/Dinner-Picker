@@ -116,6 +116,10 @@ p {
   text-align: left;
 }
 
+.random-trivia {
+  border: solid black 1px;
+}
+
 
 .navbar {
   float: right;
