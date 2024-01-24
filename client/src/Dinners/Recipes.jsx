@@ -18,7 +18,7 @@ function Recipes() {
                 variant={activeButton === 'allRecipes' ? 'primary' : 'secondary'}
                 onClick={() => onButtonClick('allRecipes')}
             >
-                All Giveaways
+                All Recipes
             </Button>
         </ButtonGroup>
         {activeButton === 'allRecipes' && <RecipeCollection />}
