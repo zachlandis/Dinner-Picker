@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import RecipeCollection from './RecipeCollection'
 
 function Recipes() {

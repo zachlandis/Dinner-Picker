@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import RecipeData from './RecipeData';
 import { UserContext } from '../UserContext';
 
 function RecipeCollection() {
     const { currentUser } = useContext(UserContext);
     const [recipes, setRecipes] = useState([]);
+    const [displayRecipeData, setDisplayRecipeData] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const resultsPerPage = 10;
     const [totalPages, setTotalPages] = useState(0);
@@ -32,6 +34,10 @@ function RecipeCollection() {
         }
     };
 
+    const handleRecipeButtonClick = () => {
+        setDisplayRecipeData(!displayRecipeData)
+    }
+
     return (
         <div>
             {recipes.map((recipe, index) => (
@@ -44,6 +50,8 @@ function RecipeCollection() {
                             <h3 className='recipe-header'>{recipe.title}</h3>
                             {/* You can include the link if it's available in the recipe data */}
                             {/* <h5><a href={recipe.link}>Read More</a></h5> */}
+                            <button onClick={handleRecipeButtonClick}>See Recipe Info</button>
+                            {displayRecipeData ? <RecipeData recipeId={recipe.id}/> : null}
                         </td>
                     </tr>
                 </div>
