@@ -8,7 +8,7 @@ import Profile from './User/Profile';
 import { UserContext } from './UserContext'; 
 import './App.css';
 import EditProfile from './User/EditProfile';
-import RecipeCollection from './Dinners/RecipeCollection';
+import Recipes from './Dinners/Recipes';
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(UserContext); 
@@ -57,7 +57,7 @@ function App() {
             <Routes>
               <Route path='/login' element={<Login />} />
               <Route path='/edit-profile' element={<EditProfile currentUser={currentUser}/>} />
-              <Route path='/recipes' element={<RecipeCollection />} />
+              <Route path='/recipes' element={<Recipes />} />
               <Route path='/logout' element={<Logout />} />
               <Route path='/signup' element={<SignUp />} />
               <Route path='/profile' element={<Profile currentUser={currentUser}/>} />

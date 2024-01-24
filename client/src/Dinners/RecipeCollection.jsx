@@ -25,7 +25,7 @@ function RecipeCollection() {
                         <img src={recipe.image} alt={recipe.name} className='recipe-image'/>
                     </td>
                     <td>
-                        <h3>{recipe.name}</h3>
+                        <h3 className='recipe-header'>{recipe.name}</h3>
                         <h5><a href={recipe.link}>Read More</a></h5>
                     </td>
                 </tr>
