@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
   
   get '/current_user', to: 'users#current'
-  patch '/update_user', to: 'users#update' 
+  patch '/update_user/:user_id', to: 'users#update' 
 
   # Reveal health status on /up
   get "up" => "rails/health#show", as: :rails_health_check

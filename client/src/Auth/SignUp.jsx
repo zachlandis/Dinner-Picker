@@ -1,91 +1,67 @@
-import React, { useState, useContext } from 'react'
-import { useNavigate } from 'react-router'
-
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../redux/actions/authActions';
 
 function SignUp() {
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const dispatch = useDispatch();
+  const authError = useSelector((state) => state.auth.error);
 
-    const registerUser = async (event) => {
-        event.preventDefault(); 
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-        const url = 'http://localhost:3000/users'; 
-      
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-              user: {
-                email: email,
-                username: username,
-                password: password,
-                password_confirmation: passwordConfirmation 
-              }
-            })
-          });
-      
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-          }
-      
-          const data = await response.json();
-          console.log('Registration successful:', data);
-          navigate('/login');
-          
-          
-          
-        } catch (error) {
-          console.error('Registration failed:', error);
-          
-        }
+    const userData = {
+      email,
+      username,
+      password,
+      password_confirmation: passwordConfirmation,
     };
-      
-    return (
-        <div className="profile-form">
-            <form onSubmit={registerUser}>
-                <input
-                    type='email'
-                    name='email'
-                    placeholder='Email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <br/>
-                <input
-                  type='text'
-                  name='username'
-                  placeholder='Username'
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <br/>
-                <input
-                    type='password'
-                    name='password'
-                    placeholder='Password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <br/>
-                <input
-                    type='password'
-                    name='password_confirmation'
-                    placeholder='Confirm Password'
-                    value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                />
-                <br/>
-                <input type='submit' value='sign-up'/>
-            </form>
-        </div>
-    )
+    dispatch(registerUser(userData));
+  };
+
+  return (
+    <div className="profile-form">
+      <form onSubmit={handleRegister}>
+        <input
+            type='email'
+            name='email'
+            placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+        />
+        <br/>
+        <input
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <br/>
+        <input
+            type='password'
+            name='password'
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+        />
+        <br/>
+        <input
+            type='password'
+            name='password_confirmation'
+            placeholder='Confirm Password'
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+        />
+        <br/>
+        <input type='submit' value='sign-up'/>
+        {authError && <p className="error-message">{authError}</p>}
+      </form>
+    </div>
+  );
 }
 
-export default SignUp
+export default SignUp;

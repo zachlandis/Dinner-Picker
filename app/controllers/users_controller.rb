@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!, only: [:current, :update]
+    before_action :authenticate_user!, only: [:current]
+    # , :update]
 
     def index
         @users = User.all
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:dietary_restrictions => [], :intolerances => [], :preferredCuisines => [])
+        params.require(:user).permit(:dietary_restrictions => [], :intolerances => [], :preferredCuisines => [], :dinner_wishlist => [])
     end
 
 
