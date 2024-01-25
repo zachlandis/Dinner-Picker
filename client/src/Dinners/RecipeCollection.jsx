@@ -5,7 +5,7 @@ import { UserContext } from '../UserContext';
 function RecipeCollection() {
     const { currentUser } = useContext(UserContext);
     const [recipes, setRecipes] = useState([]);
-    const [displayRecipeData, setDisplayRecipeData] = useState(false);
+    const [displayedRecipeId, setDisplayedRecipeId] = useState(null); // Store the recipe ID to display recipe data
     const [currentPage, setCurrentPage] = useState(1);
     const resultsPerPage = 10;
     const [totalPages, setTotalPages] = useState(0);
@@ -18,7 +18,7 @@ function RecipeCollection() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data)
+                console.log(data);
                 setRecipes(prevRecipes => [...prevRecipes, ...data.results]);
                 setTotalPages(Math.ceil(data.totalResults / resultsPerPage));
             } catch (error) {
@@ -34,8 +34,8 @@ function RecipeCollection() {
         }
     };
 
-    const handleRecipeButtonClick = () => {
-        setDisplayRecipeData(!displayRecipeData)
+    const handleRecipeButtonClick = (recipeId) => {
+        setDisplayedRecipeId(recipeId); // Set the recipe ID to display its data
     }
 
     return (
@@ -48,10 +48,8 @@ function RecipeCollection() {
                         </td>
                         <td>
                             <h3 className='recipe-header'>{recipe.title}</h3>
-                            {/* You can include the link if it's available in the recipe data */}
-                            {/* <h5><a href={recipe.link}>Read More</a></h5> */}
-                            <button onClick={handleRecipeButtonClick}>See Recipe Info</button>
-                            {displayRecipeData ? <RecipeData recipeId={recipe.id}/> : null}
+                            <button onClick={() => handleRecipeButtonClick(recipe.id)}>See Recipe Info</button>
+                            {displayedRecipeId === recipe.id && <RecipeData recipeId={recipe.id} />}
                         </td>
                     </tr>
                 </div>
