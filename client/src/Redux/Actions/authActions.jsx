@@ -46,17 +46,30 @@ export const fetchCurrentUser = () => {
 
       if (response.status === 200) {
         const user = response.data;
-        console.log("Fetched user:", user); 
         dispatch({ type: 'FETCH_CURRENT_USER_SUCCESS', payload: user });
-
-        // if (user.sign_in_count === 2) {
-        //   navigate('/edit-profile'); 
-        // } else {
-        //   navigate('/profile');
-        // }
       }
     } catch (error) {
       dispatch({ type: 'FETCH_CURRENT_USER_ERROR', payload: error.message });
+    }
+  };
+};
+
+
+// User Logout
+export const userLogout = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete('http://localhost:3000/users/sign_out', {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: 'LOGOUT_SUCCESS' });
+      } else {
+        dispatch({ type: 'LOGOUT_ERROR' });
+      }
+    } catch (error) {
+      dispatch({ type: 'LOGOUT_ERROR' });
     }
   };
 };
@@ -84,6 +97,17 @@ const authReducer = (state = initialState, action) => {
         ...state,
         currentUser: null,
         error: action.payload,
+      };
+    case 'LOGOUT_SUCCESS':
+      return {
+        ...state,
+        currentUser: null,
+        error: null,
+      };
+    case 'LOGOUT_ERROR':
+      return {
+        ...state,
+        error: 'Logout failed',
       };
     default:
       return state;

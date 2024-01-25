@@ -1,36 +1,30 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../Redux/Actions/authActions';
 
 function Logout() {
-    const navigate = useNavigate();
-    const { setCurrentUser } = useContext(UserContext);
-    
-    const performLogout = async () => {
-        try {
-            const response = await fetch('http://localhost:3000/users/sign_out', {
-                method: "DELETE",
-                credentials: 'include',
-            });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
-            if(response.ok) {
-                console.log("Logout successful");
-                localStorage.removeItem('currentUser');
-                setCurrentUser({}); 
-                navigate('/login');
-            } else {
-                console.log("Logout failed");
-            }
-        } catch (error) {
-            console.error('Error during logout:', error);
-        }
+  useEffect(() => {
+    const performLogout = async () => {
+      try {
+        await dispatch(userLogout());
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
     };
 
-    useEffect(() => {
-        performLogout();
-    }, []);
+    if (currentUser) {
+      performLogout();
+    } else {
+      navigate('/login');
+    }
+  }, [dispatch, navigate, currentUser]);
 
-    return <div>Logging out...</div>;
+  return <div>Logging out...</div>;
 }
 
 export default Logout;
