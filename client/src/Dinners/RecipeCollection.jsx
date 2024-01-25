@@ -5,7 +5,7 @@ import { UserContext } from '../UserContext';
 function RecipeCollection() {
     const { currentUser } = useContext(UserContext);
     const [recipes, setRecipes] = useState([]);
-    const [displayedRecipeId, setDisplayedRecipeId] = useState(null); // Store the recipe ID to display recipe data
+    const [displayedRecipeId, setDisplayedRecipeId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const resultsPerPage = 10;
     const [totalPages, setTotalPages] = useState(0);
@@ -35,7 +35,7 @@ function RecipeCollection() {
     };
 
     const handleRecipeButtonClick = (recipeId) => {
-        setDisplayedRecipeId(recipeId); // Set the recipe ID to display its data
+        setDisplayedRecipeId(recipeId);
     }
 
     return (

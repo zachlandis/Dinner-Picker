@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
 import { useSelector  } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Wishlist from './Wishlist';
 
 function Profile() {
-  // const { currentUser } = useContext(UserContext)
   const [foodTrivia, setFoodTrivia] = useState('');
   const navigate = useNavigate();
   const currentUser = useSelector(state => state.auth.currentUser)

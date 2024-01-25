@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { UserContext } from './UserContext';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
   const location = useLocation();
-  const { currentUser } = useContext(UserContext);
-
   const isCurrentRoute = (route) => location.pathname === route;
+  const currentUser = useSelector(state => state.auth.currentUser);
 
   return (
     <nav className='navbar'>
