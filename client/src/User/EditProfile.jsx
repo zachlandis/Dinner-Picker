@@ -113,7 +113,7 @@ function EditProfile() {
                         {mappedPreferredCuisines}
                     </div>
                 </div>
-                <input type='submit' value='Create Your Profile'/>
+                <input type='submit' value='Save'/>
             </form>
         </div>
     );

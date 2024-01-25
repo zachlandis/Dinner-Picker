@@ -28,7 +28,7 @@ p {
 /* Form and Input Styles */
 .build-profile, .profile-page, .profile-form {
   font-family: Arial, sans-serif;
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   background-color: #f4f4f4;
@@ -82,6 +82,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
 .app-name {
