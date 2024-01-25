@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../redux/actions/authActions';
+import { useNavigate } from 'react-router';
+import { registerUser } from '../Redux/Actions/authActions';
+
 
 function SignUp() {
   const [email, setEmail] = useState('');
@@ -8,6 +10,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const authError = useSelector((state) => state.auth.error);
 
   const handleRegister = (e) => {
@@ -19,7 +22,9 @@ function SignUp() {
       password,
       password_confirmation: passwordConfirmation,
     };
+    navigate('/login')
     dispatch(registerUser(userData));
+
   };
 
   return (

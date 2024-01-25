@@ -14,35 +14,35 @@ function App() {
   const { currentUser, setCurrentUser } = useContext(UserContext); 
   const [page, setPage] = useState('/');
 
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      try {
-        const storedUser = localStorage.getItem('currentUser');
-        if (storedUser) {
-          setCurrentUser(JSON.parse(storedUser));
-        } else {
-          const response = await fetch('http://localhost:3000/current_user', {
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            credentials: 'include'
-          });
+  // useEffect(() => {
+  //   const fetchCurrentUser = async () => {
+  //     try {
+  //       const storedUser = localStorage.getItem('currentUser');
+  //       if (storedUser) {
+  //         setCurrentUser(JSON.parse(storedUser));
+  //       } else {
+  //         const response = await fetch('http://localhost:3000/current_user', {
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //             'Accept': 'application/json',
+  //           },
+  //           credentials: 'include'
+  //         });
 
-          if (response.ok) {
-            const user = await response.json();
-            console.log("Fetched user:", user); 
-            setCurrentUser(user);
-            localStorage.setItem('currentUser', JSON.stringify(user)); 
-          }
-        }
-      } catch (error) {
-        console.error('Failed to fetch current user:', error);
-      }
-    };
+  //         if (response.ok) {
+  //           const user = await response.json();
+  //           console.log("Fetched user:", user); 
+  //           setCurrentUser(user);
+  //           localStorage.setItem('currentUser', JSON.stringify(user)); 
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to fetch current user:', error);
+  //     }
+  //   };
 
-    fetchCurrentUser(); 
-  }, [setCurrentUser]);
+  //   fetchCurrentUser(); 
+  // }, [setCurrentUser]);
 
   
 
