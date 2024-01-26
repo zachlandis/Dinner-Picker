@@ -18,7 +18,7 @@ function RecipeCollection() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data);
+                console.log("Recipe Collection", data);
                 setRecipes(prevRecipes => [...prevRecipes, ...data.results]);
                 setTotalPages(Math.ceil(data.totalResults / resultsPerPage));
             } catch (error) {

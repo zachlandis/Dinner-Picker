@@ -8,9 +8,16 @@ import Profile from './User/Profile';
 import './App.css';
 import EditProfile from './User/EditProfile';
 import Recipes from './Dinners/Recipes';
+import { useDispatch } from 'react-redux';
+import { fetchCurrentUser } from './Redux/Actions/authActions';
 
 function App() {
   const [page, setPage] = useState('/');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
   
 
   return (

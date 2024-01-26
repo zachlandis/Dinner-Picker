@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Wishlist from './Wishlist';
+import { Link } from 'react-router-dom';
 
 function Profile() {
   const [foodTrivia, setFoodTrivia] = useState('');
@@ -13,6 +14,10 @@ function Profile() {
   const listItems = (items) => {
     return items.join(', ');
   };
+
+  // const bulletPoints = (items) => {
+  //   return <li>{item}</li>
+  // }
 
   const mappedIntolerances = listItems(currentUser?.intolerances || []);
   const mappedPreferredCuisines = listItems(currentUser?.preferredCuisines || []);
@@ -39,9 +44,9 @@ function Profile() {
   return (
     <div className="profile-page">
       <h1 className="profile-header">{currentUser?.username || 'User'}</h1>
-      {/* Use currentUser?.username with a default 'User' in case it's not available */}
       <table className="profile-table">
         <tbody>
+          <tr> <Link to="/edit-profile">Edit Profile</Link> </tr>
           <tr>
             <td className="profile-cell">
               <p>
