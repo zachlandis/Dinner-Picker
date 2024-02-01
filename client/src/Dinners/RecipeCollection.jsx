@@ -1,38 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
-import { UserContext } from '../UserContext';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchRecipes } from '../Redux/Actions/recipeActions';
 
 function RecipeCollection() {
-    const { currentUser } = useContext(UserContext);
-    const [recipes, setRecipes] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const resultsPerPage = 10;
-    const [totalPages, setTotalPages] = useState(0);
+    const currentUser = useSelector((state) => state.auth.currentUser);
+    const recipes = useSelector((state) => state.recipes.recipes); 
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchRecipes = async () => {
-            try {
-                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?type='main course'&cuisine=${currentUser.preferredCuisines}&intolerances=${currentUser.intolerances}&diet=${currentUser.dietary_restrictions}&apiKey=9e18ededfa274d49bdaff560fc62a9c2&includeNutrition=true&includeIngredients&number=${resultsPerPage}&offset=${(currentPage - 1) * resultsPerPage}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                console.log("Recipe Collection", data);
-                setRecipes(prevRecipes => [...prevRecipes, ...data.results]);
-                setTotalPages(Math.ceil(data.totalResults / resultsPerPage));
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchRecipes();
-    }, [currentUser, currentPage]);
+        dispatch(fetchRecipes(currentUser, currentPage)); 
+    }, [currentUser, currentPage, dispatch]);
+
+    useEffect(() => {
+        console.log(recipes)
+    })
 
     const loadMoreResults = () => {
-        if (currentPage < totalPages) {
+        if (currentPage < recipes.totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
-
 
     return (
         <div>
@@ -49,7 +39,7 @@ function RecipeCollection() {
                     </tr>
                 </div>
             ))}
-            {currentPage < totalPages && (
+            {currentPage < recipes.totalPages && (
                 <button onClick={loadMoreResults}>Load More</button>
             )}
         </div>

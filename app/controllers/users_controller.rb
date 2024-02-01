@@ -33,10 +33,17 @@ class UsersController < ApplicationController
     end
 
     private
-
+    
     def user_params
-        params.require(:user).permit(:dietary_restrictions => [], :intolerances => [], :preferredCuisines => [], :dinner_wishlist => [])
-    end
+        params.require(:user).permit(
+          :dietary_restrictions => [],
+          :intolerances => [],
+          :preferredCuisines => [],
+          :dinner_wishlist => [:title, {:instructions => []}, {:ingredients => []}]
+        )
+      end
+      
+    
 
 
 end

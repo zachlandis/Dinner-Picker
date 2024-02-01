@@ -15,10 +15,6 @@ function Profile() {
     return items.join(', ');
   };
 
-  // const bulletPoints = (items) => {
-  //   return <li>{item}</li>
-  // }
-
   const mappedIntolerances = listItems(currentUser?.intolerances || []);
   const mappedPreferredCuisines = listItems(currentUser?.preferredCuisines || []);
   const mapppedDiets = listItems(currentUser?.dietary_restrictions || []);
@@ -44,9 +40,9 @@ function Profile() {
   return (
     <div className="profile-page">
       <h1 className="profile-header">{currentUser?.username || 'User'}</h1>
+      <div className='edit-profile-link'><Link to="/edit-profile">Edit Profile</Link></div>
       <table className="profile-table">
         <tbody>
-          <tr> <Link to="/edit-profile">Edit Profile</Link> </tr>
           <tr>
             <td className="profile-cell">
               <p>
@@ -75,7 +71,7 @@ function Profile() {
       </table>
       <div className="random-trivia">{foodTrivia}</div>
       <div>
-        <Wishlist />
+        {/* <Wishlist currentUser={currentUser} /> */}
       </div>
     </div>
   );

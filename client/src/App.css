@@ -5,6 +5,7 @@
   padding: 2rem;
   text-align: center;
   background-color: lightblue;
+  min-height: 100vh;
 }
 
 /* General Text and Section Styles */
@@ -145,6 +146,11 @@ p {
 }
 
 /* Profile Page Styles */
+.edit-profile-link {
+  text-align: left;
+}
+
+
 .profile-table {
   min-width: 100%;
   justify-content: center;
