@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRecipes } from '../Redux/Actions/recipeActions';
+import { fetchRecipes } from '../Redux/Actions/fetchRecipesActions';
 
 function RecipeCollection() {
     const [currentPage, setCurrentPage] = useState(1);

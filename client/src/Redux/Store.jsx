@@ -1,12 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./Actions/authActions";
-import { recipesReducer } from "./Actions/recipeActions";
+import { recipeReducer } from "./Reducers/fetchRecipesReducer";
+import { foodTriviaReducer } from "./Reducers/foodTriviaReducer";
+import { recipeDetailsReducer } from "./Reducers/fetchRecipeDetailsReducer";
 
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    recipes: recipesReducer
+    recipes: recipeReducer,
+    trivia: foodTriviaReducer,
+    recipeDetails: recipeDetailsReducer,
   },
 });
 

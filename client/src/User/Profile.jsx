@@ -19,19 +19,21 @@ function Profile() {
   const mappedPreferredCuisines = listItems(currentUser?.preferredCuisines || []);
   const mapppedDiets = listItems(currentUser?.dietary_restrictions || []);
 
-  const randomFoodTrivia =
-    'https://api.spoonacular.com/food/trivia/random?apiKey=9e18ededfa274d49bdaff560fc62a9c2';
+  // const randomFoodTrivia =
+  //   'https://api.spoonacular.com/food/trivia/random?apiKey=9e18ededfa274d49bdaff560fc62a9c2';
 
-  useEffect(() => {
-    fetch(randomFoodTrivia, {
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((r) => r.json())
-      .then((trivia) => setFoodTrivia(trivia.text))
-      .catch((error) => {
-        console.error('Error fetching food trivia:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(randomFoodTrivia, {
+  //     headers: { 'Content-Type': 'application/json' },
+  //   })
+  //     .then((r) => r.json())
+  //     .then((trivia) => setFoodTrivia(trivia.text))
+  //     .catch((error) => {
+  //       console.error('Error fetching food trivia:', error);
+  //     });
+  // }, []);
+
+  
 
   if (!currentUser) {
     return <h1>Loading...</h1>;
