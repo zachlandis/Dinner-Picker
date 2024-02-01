@@ -39,18 +39,21 @@ function RecipeData() {
                 <img src={recipeData.image} alt={recipeData.title}/>
                 <html>{stripHtmlTags(recipeData.summary)}</html>
                 <div className='recipe-data-container'>
-                    <h2>Cooking Instructions</h2>
-                    <p>{lineByLineInstructions(recipeData.instructions)}</p>
+                <h2>Ingredients</h2>
+                <div className='recipe-ingredients'>
+                    <ul>
+                    {recipeData.extendedIngredients &&
+                        [...new Set(recipeData.extendedIngredients.map(ingredient => ingredient.name))]
+                        .sort()
+                        .map((ingredientName, index) => (
+                            <li key={index}>{ingredientName}</li>
+                        ))}
+                    </ul>
+                </div>
                 </div>
                 <div className='recipe-data-container'>
-                    <h2>Ingredients</h2>
-                    <div className='recipe-ingredients'>
-                        <ul>
-                            {recipeData.extendedIngredients && recipeData.extendedIngredients.map((ingredient, index) => (
-                                <li key={index}>{ingredient.name}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    <h2>Cooking Instructions</h2>
+                    <p>{lineByLineInstructions(recipeData.instructions)}</p>
                 </div>
             </div>
         </div>

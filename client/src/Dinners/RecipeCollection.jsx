@@ -12,7 +12,7 @@ function RecipeCollection() {
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?cuisine=${currentUser.preferredCuisines}&intolerances=${currentUser.intolerances}&diet=${currentUser.dietary_restrictions}&apiKey=9e18ededfa274d49bdaff560fc62a9c2&includeNutrition=true&includeIngredients&number=${resultsPerPage}&offset=${(currentPage - 1) * resultsPerPage}`);
+                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?type='main course'&cuisine=${currentUser.preferredCuisines}&intolerances=${currentUser.intolerances}&diet=${currentUser.dietary_restrictions}&apiKey=9e18ededfa274d49bdaff560fc62a9c2&includeNutrition=true&includeIngredients&number=${resultsPerPage}&offset=${(currentPage - 1) * resultsPerPage}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
