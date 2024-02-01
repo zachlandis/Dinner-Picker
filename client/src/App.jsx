@@ -8,6 +8,7 @@ import Profile from './User/Profile';
 import './App.css';
 import EditProfile from './User/EditProfile';
 import Recipes from './Dinners/Recipes';
+import RecipeData from './Dinners/RecipeData';
 import { useDispatch } from 'react-redux';
 import { fetchCurrentUser } from './Redux/Actions/authActions';
 
@@ -32,6 +33,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/edit-profile' element={<EditProfile/>} />
               <Route path='/recipes' element={<Recipes />} />
+              <Route path="/recipe/:recipeId" element={<RecipeData />} />
               <Route path='/logout' element={<Logout />} />
               <Route path='/signup' element={<SignUp />} />
               <Route path='/profile' element={<Profile/>} />

@@ -164,7 +164,7 @@ p {
   border: solid black 1px;
 }
 
-/* Recipes Styles */
+/* RecipeCollection Styles */
 .recipe-row {
   border: #333;
 }
@@ -186,4 +186,11 @@ p {
 
 .recipe-info-cell {
   padding-left: 20px; 
+}
+
+
+/* RecipeData Styles */
+.recipe-ingredients ul {
+  border: 1px solid black;
+  text-align: left;
 }

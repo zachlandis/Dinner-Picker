@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import RecipeData from './RecipeData';
+import { Link } from 'react-router-dom'
 import { UserContext } from '../UserContext';
 
 function RecipeCollection() {
     const { currentUser } = useContext(UserContext);
     const [recipes, setRecipes] = useState([]);
-    const [displayedRecipeId, setDisplayedRecipeId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const resultsPerPage = 10;
     const [totalPages, setTotalPages] = useState(0);
@@ -34,9 +33,6 @@ function RecipeCollection() {
         }
     };
 
-    const handleRecipeButtonClick = (recipeId) => {
-        setDisplayedRecipeId(recipeId);
-    }
 
     return (
         <div>
@@ -48,8 +44,7 @@ function RecipeCollection() {
                         </td>
                         <td>
                             <h3 className='recipe-header'>{recipe.title}</h3>
-                            <button onClick={() => handleRecipeButtonClick(recipe.id)}>See Recipe Info</button>
-                            {displayedRecipeId === recipe.id && <RecipeData recipeId={recipe.id} />}
+                            <Link to={`/recipe/${recipe.id}`}>See Recipe Info</Link>
                         </td>
                     </tr>
                 </div>
