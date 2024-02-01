@@ -16,39 +16,42 @@ function RecipeData() {
             .catch(error => console.error('Error fetching data:', error));
     }, [recipeId]); 
 
-    const ingredientsList = [];
-
-    if (recipeData.analyzedInstructions && recipeData.analyzedInstructions[0] && recipeData.analyzedInstructions[0].steps) {
-        recipeData.analyzedInstructions[0].steps.forEach(step => {
-            if (step.ingredients) {
-                step.ingredients.forEach(ingredient => {
-                    ingredientsList.push(ingredient.name);
-                });
-            } else {
-                console.log("no ingredients")
-            }
-        });
-    }
-
     function stripHtmlTags(html) {
         const div = document.createElement("div");
         div.innerHTML = html;
         return div.textContent || div.innerText || "";
       }
+    
+      function lineByLineInstructions(instructions) {
+        const textContent = stripHtmlTags(instructions);
+        const numberedInstructions = textContent.split(/\. +/).map((step, index) => (
+          <p key={index}>{`${index + 1}. ${step}`}</p>
+        ));
+        return numberedInstructions;
+      }
+      
       
  
     return (
         <div>
+            <div className='recipe-data-container'>
                 <h1>{recipeData.title}</h1>
                 <img src={recipeData.image} alt={recipeData.title}/>
                 <html>{stripHtmlTags(recipeData.summary)}</html>
-                <h2>Ingredients</h2>
-                <div className='recipe-ingredients'>
-                    <ul>
-                        {ingredientsList.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>
-                        ))}
-                    </ul>
+                <div className='recipe-data-container'>
+                    <h2>Cooking Instructions</h2>
+                    <p>{lineByLineInstructions(recipeData.instructions)}</p>
+                </div>
+                <div className='recipe-data-container'>
+                    <h2>Ingredients</h2>
+                    <div className='recipe-ingredients'>
+                        <ul>
+                            {recipeData.extendedIngredients && recipeData.extendedIngredients.map((ingredient, index) => (
+                                <li key={index}>{ingredient.name}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     );
