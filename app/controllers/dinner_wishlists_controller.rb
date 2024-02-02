@@ -45,6 +45,7 @@ class DinnerWishlistsController < ApplicationController
     def wishlist_params
       params.require(:dinner_wishlist).permit(
         :title,
+        :recipe_id,
         :instructions => [],
         :ingredients => []
       )

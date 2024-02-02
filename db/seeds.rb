@@ -8,9 +8,9 @@ user = User.create!(
   preferredCuisines: []
 )
 
-# Create a DinnerWishlist record for the user
 user.dinner_wishlists.create!(
   title: 'Recipe 1 Title',
+  recipe_id: 222222,
   ingredients: [
     'Ingredient 1',
     'Ingredient 2',

@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
+import { useNavigate } from 'react-router';
 
 function Wishlist() {
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const data = React.useMemo(() => currentUser.dinner_wishlists, [currentUser.dinner_wishlists]);
 
@@ -12,13 +14,16 @@ function Wishlist() {
       accessor: 'title',
     },
     {
-      Header: 'Ingredients',
-      accessor: 'ingredients',
-    },
-    {
-      Header: 'Controls'
+      Header: 'Actions',
+      id: 'actions', 
+      Cell: ({ row }) => (
+        <>
+          <button onClick={() => navigate(`/recipe/${row.original.id}`)}>View</button>
+          <button onClick={() => removeItemFromWishlist(row.original.id)}>Remove</button>
+        </>
+      )
     }
-  ], []);
+  ], [navigate]);
 
   const {
     getTableProps,
