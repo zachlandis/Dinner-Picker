@@ -12,18 +12,35 @@ function Wishlist() {
     {
       Header: 'Title',
       accessor: 'title',
+      Cell: ({ row }) => (
+        <a
+          href="#"
+          className="recipe-title"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(`/recipe/${row.original.recipe_id}`);
+          }}
+        >
+          {row.values.title}
+        </a>
+      ),
     },
     {
       Header: 'Actions',
       id: 'actions', 
       Cell: ({ row }) => (
-        <>
-          <button onClick={() => navigate(`/recipe/${row.original.id}`)}>View</button>
-          <button onClick={() => removeItemFromWishlist(row.original.id)}>Remove</button>
-        </>
-      )
+        <div className="remove-button-container dinner-wishlist-cell">
+          <button
+            className="remove-button" 
+            onClick={() => removeItemFromWishlist(row.original.id)}
+          >
+            Remove
+          </button>
+        </div>
+      ),
     }
   ], [navigate]);
+
 
   const {
     getTableProps,

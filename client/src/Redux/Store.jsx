@@ -3,6 +3,7 @@ import authReducer from "./Actions/authActions";
 import { recipeReducer } from "./Reducers/fetchRecipesReducer";
 import { foodTriviaReducer } from "./Reducers/foodTriviaReducer";
 import { recipeDetailsReducer } from "./Reducers/fetchRecipeDetailsReducer";
+import wishlistReducer from "./Reducers/wishlistReducer";
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     recipes: recipeReducer,
     trivia: foodTriviaReducer,
     recipeDetails: recipeDetailsReducer,
+    wishlist: wishlistReducer,
   },
 });
 

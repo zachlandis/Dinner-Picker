@@ -178,6 +178,21 @@ p {
   text-align: left;
 }
 
+.recipe-title {
+  font-size: 20px;
+  text-decoration: none;
+  color: blue; 
+}
+
+.remove-button-container {
+  width: 100%;
+  text-align: right;
+}
+
+.dinner-wishlist-cell {
+  text-align: right; 
+}
+
 /* RecipeCollection Styles */
 .recipe-row {
   border: #333;

@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRecipeDetails } from '../Redux/Actions/fetchRecipeDetailActions';
+import { updateWishlist } from '../Redux/Actions/wishlistActions';
 
 function RecipeData() {
     const { recipeId } = useParams();
     const currentUser = useSelector((state) => state.auth.currentUser);
     const recipeDetails = useSelector((state) => state.recipeDetails.recipeDetails);
     const dispatch = useDispatch();
-  
+    
     useEffect(() => {
-      dispatch(fetchRecipeDetails(recipeId));
+        dispatch(fetchRecipeDetails(recipeId));
     }, [recipeId, dispatch]);
-  
+    
 
+    
+    
+    function handleWishlist() {
+        dispatch(updateWishlist(recipeDetails, recipeId, lineByLineInstructions));
+      }
 
     function stripHtmlTags(html) {
         const div = document.createElement("div");
@@ -29,38 +35,41 @@ function RecipeData() {
         return numberedInstructions;
     }
 
-    function handleWishlist() {
-        const userId = currentUser.id;
+
+
+    // function handleWishlist() {
+    //     const userId = currentUser.id;
 
         
-        fetch(`http://localhost:3000/update_user/`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                user: {
-                    dinner_wishlist: [
-                        {
-                            title: recipeDetails.title, 
-                            ingredients: recipeDetails.extendedIngredients.map((ingredient) => ingredient.name),
-                            instructions: lineByLineInstructions(recipeDetails.instructions),
-                        }
-                    ]
-                }
-            })
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Recipe added to wishlist');
-                } else {
-                    console.error('Error updating wishlist');
-                }
-            })
-            .catch(error => console.error('Error updating wishlist:', error));
-    }
+    //     fetch(`http://localhost:3000/update_user/`, {
+    //         method: "PATCH",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Accept': 'application/json',
+    //         },
+    //         credentials: 'include',
+    //         body: JSON.stringify({
+    //             user: {
+    //                 dinner_wishlist: [
+    //                     {
+    //                         title: recipeDetails.title, 
+    //                         ingredients: recipeDetails.extendedIngredients.map((ingredient) => ingredient.name),
+    //                         instructions: lineByLineInstructions(recipeDetails.instructions),
+    //                         recipe_id: recipeId,
+    //                     }
+    //                 ]
+    //             }
+    //         })
+    //     })
+    //         .then(response => {
+    //             if (response.ok) {
+    //                 console.log('Recipe added to wishlist');
+    //             } else {
+    //                 console.error('Error updating wishlist');
+    //             }
+    //         })
+    //         .catch(error => console.error('Error updating wishlist:', error));
+    // }
 
     return (
         <div>

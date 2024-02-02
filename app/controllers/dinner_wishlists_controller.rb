@@ -1,5 +1,6 @@
 class DinnerWishlistsController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
+    before_action :set_user, only: [:create]
     
   
     def index
@@ -22,7 +23,8 @@ class DinnerWishlistsController < ApplicationController
     end
   
     def update
-      @wishlist = @user.dinner_wishlists.find(params[:id])
+      user_id = params[:user][:user_id] 
+      @wishlist = User.find(user_id).dinner_wishlists.find(params[:id])
       if @wishlist.update(wishlist_params)
         render json: @wishlist
       else
@@ -39,7 +41,7 @@ class DinnerWishlistsController < ApplicationController
     private
   
     def set_user
-      @user = User.find(params[:user_id])
+      @user = current_user
     end
   
     def wishlist_params
