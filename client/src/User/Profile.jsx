@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Wishlist from './Wishlist';
 import { Link } from 'react-router-dom';
+import RandomizedMenu from './RandomizedMenu';
 
 function Profile() {
   const [foodTrivia, setFoodTrivia] = useState('');
@@ -62,11 +63,7 @@ function Profile() {
             </td>
             <td className="profile-cell">
               <h3>This Week's Dinners</h3>
-              <ul>
-                <li>test</li>
-                <li>test</li>
-                <li>test</li>
-              </ul>
+              <RandomizedMenu currentUser={currentUser}/>
             </td>
           </tr>
         </tbody>

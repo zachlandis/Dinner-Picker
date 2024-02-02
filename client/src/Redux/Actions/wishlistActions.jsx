@@ -36,3 +36,34 @@ export const updateWishlist = (recipeDetails, recipeId, lineByLineInstructions) 
     }
   };
 };
+
+
+
+export const REMOVE_FROM_WISHLIST_SUCCESS = 'REMOVE_FROM_WISHLIST_SUCCESS';
+export const REMOVE_FROM_WISHLIST_FAILURE = 'REMOVE_FROM_WISHLIST_FAILURE';
+
+export const removeFromWishlist = (userId, itemId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:3000/dinner_wishlists/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        dispatch({ type: REMOVE_FROM_WISHLIST_SUCCESS, itemId });
+        console.log('Recipe removed from wishlist');
+      } else {
+        dispatch({ type: REMOVE_FROM_WISHLIST_FAILURE });
+        console.error('Error removing recipe from wishlist', itemId);
+      }
+    } catch (error) {
+      console.error('Error removing recipe from wishlist:', error);
+      dispatch({ type: REMOVE_FROM_WISHLIST_FAILURE });
+    }
+  };
+};

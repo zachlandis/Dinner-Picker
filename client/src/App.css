@@ -166,6 +166,16 @@ p {
   text-align: left;
 }
 
+.randomized-menu-table {
+  
+}
+
+.randomized-menu-item-columns {
+  text-align: right;
+  padding: 20px;
+  margin: 2px;
+}
+
 .random-trivia {
   border: solid black 1px;
 }
