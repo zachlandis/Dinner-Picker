@@ -62,8 +62,8 @@ function Wishlist() {
   const { globalFilter } = state;
 
   return (
-    <div>
-      <h1>Wishlist</h1>
+    <div className='centered-content'>
+      <h3>Wishlist</h3>
       <div className='search-bar'>
         <input
           type='text'

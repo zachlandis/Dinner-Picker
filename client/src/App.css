@@ -4,12 +4,11 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: lightblue;
   min-height: 100vh;
 }
 
 /* General Text and Section Styles */
-h1, h3, h5, .profile-header, .section-header {
+h3, h5, .section-header {
   color: #333;
   text-align: center;
 }
@@ -32,7 +31,7 @@ p {
   max-width: 100%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #f0eded;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -146,28 +145,43 @@ p {
 }
 
 /* Profile Page Styles */
-.edit-profile-link {
+
+
+.profile-preferences {
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.username-cell {
   text-align: left;
 }
 
-
-.profile-table {
-  min-width: 100%;
-  justify-content: center;
+.profile-header-table {
+  width: 100%; 
 }
 
-.profile-cell {
-  border: solid black 1px;
-  text-align: left;
-  width: 50%;
+.edit-profile-cell {
+  text-align: right; 
 }
 
 .edit-profile-button {
   text-align: left;
 }
 
+.centered-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
 .randomized-menu-table {
-  
+  width: 45%;
+  justify-content: center;
 }
 
 .randomized-menu-item-columns {

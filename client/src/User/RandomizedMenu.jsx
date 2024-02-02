@@ -11,12 +11,12 @@ function RandomizedMenu({ currentUser }) {
         <tr key={dinner.id} className='randomized-menu-item-columns'>
             <td><strong>{daysOfWeek[index]}</strong></td>
             <td><Link to={`http://localhost:5173/recipe/${dinner.recipe_id}`}>{dinner.title}</Link></td>
-            {/* <td>{dinner.title}</td> */}
         </tr>
     ));
 
   return (
-    <div>
+    <div className='centered-content'>
+        <h3>This Week's Dinners</h3>
         <table className='randomized-menu-table'>
             <thead>
                 <tr className='randomized-menu-item-columns'>
