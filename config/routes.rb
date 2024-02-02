@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   registrations: 'users/registrations'
 }
 
+resources :dinner_wishlists, only: [:index]
+# , :create, :show, :update, :destroy]
+
   # resource :users
   get '/users', to: 'users#index'
   

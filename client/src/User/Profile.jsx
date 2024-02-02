@@ -33,7 +33,7 @@ function Profile() {
   //     });
   // }, []);
 
-  
+
 
   if (!currentUser) {
     return <h1>Loading...</h1>;
@@ -73,7 +73,7 @@ function Profile() {
       </table>
       <div className="random-trivia">{foodTrivia}</div>
       <div>
-        {/* <Wishlist currentUser={currentUser} /> */}
+        <Wishlist currentUser={currentUser} />
       </div>
     </div>
   );

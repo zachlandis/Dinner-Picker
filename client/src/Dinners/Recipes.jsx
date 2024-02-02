@@ -5,7 +5,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import RecipeCollection from './RecipeCollection'
 
 function Recipes() {
-    const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'allRecipes');
+    const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'For You');
 
     function onButtonClick(buttonName) {
         setActiveButton(buttonName);
@@ -16,13 +16,13 @@ function Recipes() {
     <div>
         <ButtonGroup>
             <Button
-                variant={activeButton === 'allRecipes' ? 'primary' : 'secondary'}
+                variant={activeButton === 'For You' ? 'primary' : 'secondary'}
                 onClick={() => onButtonClick('allRecipes')}
             >
-                All Recipes
+                For You
             </Button>
         </ButtonGroup>
-        {activeButton === 'allRecipes' && <RecipeCollection />}
+        {activeButton === 'For You' && <RecipeCollection />}
     </div>
   )
 }

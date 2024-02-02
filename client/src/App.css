@@ -170,6 +170,14 @@ p {
   border: solid black 1px;
 }
 
+.wishlist-container {
+  text-align: left;
+}
+
+.wishlist-item {
+  text-align: left;
+}
+
 /* RecipeCollection Styles */
 .recipe-row {
   border: #333;
