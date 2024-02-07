@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 
-function RandomizedMenu({ currentUser }) {
+function RandomizedMenu() {
+    const {currentUser} = useSelector((state) => state.auth.currentUser)
 
     const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
 

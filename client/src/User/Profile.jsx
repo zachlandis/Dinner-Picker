@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Wishlist from './Wishlist';
 import { Link } from 'react-router-dom';
 import RandomizedMenu from './RandomizedMenu';
+import ShoppingList from './ShoppingList';
 
 function Profile() {
   const [foodTrivia, setFoodTrivia] = useState('');
-  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth.currentUser);
-
-  const dispatch = useDispatch();
 
   const listItems = (items) => {
     return items.join(', ');
@@ -52,8 +50,23 @@ function Profile() {
         </div>
       </div>
       <br/>
-      <div className='profile-preferences'>
-          <RandomizedMenu currentUser={currentUser}/>
+      <div className='random-menu-shopping-list-container'>
+        <table className='components-table'>
+          <tbody>
+            <tr>
+              <td className='component-cell'>
+                <div className='randomized-menu-container'>
+                  {/* <RandomizedMenu currentUser={currentUser} /> */}
+                </div>
+              </td>
+              <td className='component-cell'>
+                <div className='shopping-list-container'>
+                  <ShoppingList />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div className="random-trivia">{foodTrivia}</div>
       <br/>

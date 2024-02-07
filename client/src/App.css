@@ -146,6 +146,23 @@ p {
 
 /* Profile Page Styles */
 
+.random-menu-shopping-list-container {
+  display: flex;
+  justify-content: center; /* Center the table horizontally */
+  align-items: center; /* Center the table vertically */
+  margin-top: 20px; /* Adjust the top margin as needed */
+}
+
+.components-table {
+  border-collapse: separate;
+  border-spacing: 20px; 
+}
+
+.component-cell {
+  padding: 10px;
+  border: 1px solid #ffffff;
+}
+
 
 .profile-preferences {
   width: 100%;
@@ -172,6 +189,7 @@ p {
 }
 
 .centered-content {
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -180,7 +198,7 @@ p {
 }
 
 .randomized-menu-table {
-  width: 45%;
+  width: 100%;
   justify-content: center;
 }
 
@@ -215,6 +233,14 @@ p {
 
 .dinner-wishlist-cell {
   text-align: right; 
+}
+
+
+/* ShoppingList */
+.wishlist-table-container {
+  overflow-y: scroll;
+  height: 300px;
+  text-align: left;
 }
 
 /* RecipeCollection Styles */
