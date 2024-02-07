@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'; 
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import { useNavigate } from 'react-router';
-import { removeFromWishlist } from "../Redux/Actions/wishlistActions.jsx";
+import { fetchWishlist, removeFromWishlist } from "../Redux/Actions/wishlistActions.jsx";
 
 function Wishlist({ currentUser }) {
   const navigate = useNavigate();
-  
   const dispatch = useDispatch();
   const [deletedItemId, setDeletedItemId] = useState(null);
 
-  const data = React.useMemo(() => currentUser.dinner_wishlists, [currentUser.dinner_wishlists]);
+  const data = useSelector(state => state.wishlist.wishlist); 
 
-  if (!data) {
+  useEffect(() => {
+    dispatch(fetchWishlist(currentUser.id));
+  }, [dispatch, currentUser.id]);
+
+  if (!data || !currentUser) {
     return <div>Loading...</div>;
   }
 
@@ -52,7 +55,7 @@ function Wishlist({ currentUser }) {
         </div>
       ),
     },
-  ], [navigate]);
+  ], []);
 
   const {
     getTableProps,
@@ -117,5 +120,6 @@ function Wishlist({ currentUser }) {
     </div>
   );
 }
+
 
 export default Wishlist;

@@ -1,56 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecipes } from '../Redux/Actions/fetchRecipesActions';
-import { updateWishlist, removeFromWishlist } from '../Redux/Actions/wishlistActions';
 
 function RecipeCollection() {
+    const recipes = useSelector((state) => state.recipes.recipes)
     const [currentPage, setCurrentPage] = useState(1);
-    const [inWishlist, setInWishlist] = useState([])
-    const currentUser = useSelector((state) => state.auth.currentUser);
-    const recipes = useSelector((state) => state.recipes.recipes); 
-
+    const resultsPerPage = 10;
+    const [totalPages, setTotalPages] = useState(0);
+    const currentUser = useSelector((state) => state.auth.currentUser)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchRecipes(currentUser, currentPage)); 
-    }, [currentUser, currentPage, dispatch]);
+        dispatch(fetchRecipes(currentUser, 1))
+    }, [currentUser, dispatch])
 
+    useEffect(() => {
+        console.log("CurrentUser from RecipeCollection", currentUser)
+    })
 
     const loadMoreResults = () => {
-        if (currentPage < recipes.totalPages) {
+        if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
 
-    const handleToggleWishlist = (recipeId) => {
-        if (inWishlist.includes(recipeId)) {
-          dispatch(removeFromWishlist(currentUser.id, recipeId));
-          setInWishlist(inWishlist.filter((id) => id !== recipeId));
-        } else {
-          dispatch(updateWishlist(recipeDetails, recipeId, lineByLineInstructions));
-          setInWishlist([...inWishlist, recipeId]);
-        }
-      };
-      
-
-    const handleRemoveFromWishlist = (currentUserId, itemId) => {
-        dispatch(removeFromWishlist(currentUserId, itemId));
-    }
-    
-    const handleAddToWishlist = (recipeDetails, recipeId) => {
-        dispatch(updateWishlist(recipeDetails, recipeId, lineByLineInstructions));
-      }
-
-    
-
-    function lineByLineInstructions(instructions) {
-        const textContent = stripHtmlTags(instructions);
-        const numberedInstructions = textContent.split(/\. +/).map((step, index) => (
-            <p key={index}>{`${index + 1}. ${step}`}</p>
-        ));
-        return numberedInstructions;
-    }
 
     return (
         <div>
@@ -64,13 +38,10 @@ function RecipeCollection() {
                             <h3 className='recipe-header'>{recipe.title}</h3>
                             <Link to={`/recipe/${recipe.id}`}>See Recipe Info</Link>
                         </td>
-                        <td>
-                            <button onClick={handleToggleWishlist}>{inWishlist ? 'Add to Wishlist' : 'Remove from Wishlist' }</button>
-                        </td>
                     </tr>
                 </div>
             ))}
-            {currentPage < recipes.totalPages && (
+            {currentPage < totalPages && (
                 <button onClick={loadMoreResults}>Load More</button>
             )}
         </div>

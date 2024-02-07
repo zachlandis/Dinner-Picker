@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 
 resources :dinner_wishlists, only: [:index, :create, :show, :update, :destroy]
 
+# Route for fetching a user's dinner wishlists
+resources :users do
+  resources :dinner_wishlists, only: [:index]  # Assuming you only need index action
+end
+
   # resource :users
   get '/users', to: 'users#index'
   

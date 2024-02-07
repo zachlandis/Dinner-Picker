@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+// import 'bootstrap/dist/css/bootstrap.css';
+// import Button from 'react-bootstrap/Button';
+// import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import RecipeCollection from './RecipeCollection'
 
 function Recipes() {
-    const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'For You');
+    // const [activeButton, setActiveButton] = useState(localStorage.getItem('activeButton') || 'For You');
 
-    function onButtonClick(buttonName) {
-        setActiveButton(buttonName);
-    }
+    // function onButtonClick(buttonName) {
+    //     setActiveButton(buttonName);
+    // }
 
 
   return (
     <div>
-        <ButtonGroup>
+        {/* <ButtonGroup>
             <Button
                 variant={activeButton === 'For You' ? 'primary' : 'secondary'}
                 onClick={() => onButtonClick('allRecipes')}
@@ -22,7 +22,9 @@ function Recipes() {
                 For You
             </Button>
         </ButtonGroup>
-        {activeButton === 'For You' && <RecipeCollection />}
+        {activeButton === 'For You' && */}
+         <RecipeCollection />
+        {/* } */}
     </div>
   )
 }

@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-function RandomizedMenu({ currentUser, generateRandomizedMenu, randomizedMenu }) {
-//   const [randomizedMenu, setRandomizedMenu] = useState([]);
+function RandomizedMenu({ generateRandomizedMenu, randomizedMenu }) {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-//   const generateRandomizedMenu = () => {
-//     const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
-//     setRandomizedMenu(shuffledDinners);
-//     localStorage.setItem('randomizedMenu', JSON.stringify(shuffledDinners));
-//   };
 
   return (
     <div className='centered-content'>

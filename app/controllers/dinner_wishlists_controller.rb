@@ -9,7 +9,7 @@ class DinnerWishlistsController < ApplicationController
     end
   
     def create
-      @wishlist = @user.DinnerWishlist.build(wishlist_params)
+      @wishlist = @user.dinner_wishlists.build(wishlist_params)
       if @wishlist.save
         render json: @wishlist, status: :created
       else
@@ -18,13 +18,13 @@ class DinnerWishlistsController < ApplicationController
     end
   
     def show
-      @wishlist = @user.DinnerWishlist.find(params[:id])
+      @wishlist = @user.dinner_wishlists.find(params[:id])
       render json: @wishlist
     end
   
     def update
       user_id = params[:user][:user_id] 
-      @wishlist = User.find(user_id).DinnerWishlist.find(params[:id])
+      @wishlist = User.find(user_id).dinner_wishlists.find(params[:id])
       if @wishlist.update(wishlist_params)
         render json: @wishlist
       else
@@ -33,7 +33,7 @@ class DinnerWishlistsController < ApplicationController
     end
   
     def destroy
-      @wishlist = @user.DinnerWishlist.find(params[:id])
+      @wishlist = @user.dinner_wishlists.find(params[:id])
       @wishlist.destroy
       head :no_content
     end

@@ -13,10 +13,10 @@ export const fetchWishlistFailure = () => ({
   type: FETCH_WISHLIST_FAILURE,
 });
 
-export const fetchWishlist = (wishlistId) => {
+export const fetchWishlist = (userId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`http://localhost:3000/dinner_wishlists/${wishlistId}`, {
+      const response = await fetch(`http://localhost:3000/users/${userId}/dinner_wishlists`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -62,7 +62,8 @@ export const updateWishlist = (recipeDetails, recipeId, lineByLineInstructions) 
       });
 
       if (response.ok) {
-        dispatch({ type: UPDATE_WISHLIST_SUCCESS });
+        const updatedWishlistData = await response.json();
+        dispatch({ type: UPDATE_WISHLIST_SUCCESS, updatedWishlist: updatedWishlistData });
         console.log('Recipe added to wishlist');
       } else {
         dispatch({ type: UPDATE_WISHLIST_FAILURE });

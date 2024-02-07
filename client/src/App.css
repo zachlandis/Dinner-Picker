@@ -148,15 +148,33 @@ p {
 
 .random-menu-shopping-list-container {
   display: flex;
-  justify-content: center; /* Center the table horizontally */
-  align-items: center; /* Center the table vertically */
-  margin-top: 20px; /* Adjust the top margin as needed */
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 20px; 
 }
 
 .components-table {
   border-collapse: separate;
   border-spacing: 20px; 
 }
+
+.random-menu-shopping-list-container {
+  display: flexbox;
+}
+
+.shopping-list-container {
+  flex: 1;
+  padding: 0 10px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.randomized-menu-container {
+  flex: 1;
+  padding: 0 10px;
+  height: 300px;
+}
+
 
 .component-cell {
   padding: 10px;

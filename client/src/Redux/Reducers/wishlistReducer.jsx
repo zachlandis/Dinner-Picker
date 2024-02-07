@@ -25,7 +25,7 @@ const wishlistReducer = (state = initialState, action) => {
         ...state,
         updateSuccess: true,
         updateError: false,
-        wishlist: action.updatedWishlist,
+        wishlist: action.wishlist,
       };
     case UPDATE_WISHLIST_FAILURE:
       return {

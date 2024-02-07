@@ -10,7 +10,8 @@ function ShoppingList({ randomizedMenu }) {
         }
         return acc;
       }, []);
-      return ingredients.map((ingredient, index) => ({ id: index, ingredient }));
+      const uniqueIngredients = [...new Set(ingredients)];
+      return uniqueIngredients.sort().map((ingredient, index) => ({ id: index, ingredient }));
     }
     return [];
   }, [randomizedMenu]);

@@ -47,8 +47,6 @@ function Profile() {
             <td className='edit-profile-cell'><Link to="/edit-profile">Edit Profile</Link></td>
           </tr>
         </table>
-        
-        
       </div>
       <br/>
       <div className='profile-preferences'>
