@@ -56,7 +56,7 @@ function Profile() {
             <tr>
               <td className='component-cell'>
                 <div className='randomized-menu-container'>
-                  {/* <RandomizedMenu currentUser={currentUser} /> */}
+                  <RandomizedMenu currentUser={currentUser} />
                 </div>
               </td>
               <td className='component-cell'>
