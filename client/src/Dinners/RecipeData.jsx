@@ -3,9 +3,11 @@ import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRecipeDetails } from '../Redux/Actions/fetchRecipeDetailActions';
 import { updateWishlist } from '../Redux/Actions/wishlistActions';
+import { removeFromWishlist } from '../Redux/Actions/wishlistActions';
 
 function RecipeData() {
     const { recipeId } = useParams();
+    const [inWishlist, setInWishlist] = useState(false)
     const currentUser = useSelector((state) => state.auth.currentUser);
     const recipeDetails = useSelector((state) => state.recipeDetails.recipeDetails);
     const dispatch = useDispatch();
@@ -13,13 +15,29 @@ function RecipeData() {
     useEffect(() => {
         dispatch(fetchRecipeDetails(recipeId));
     }, [recipeId, dispatch]);
-    
 
+    const handleToggleWishlist = () => {
+        setInWishlist(!inWishlist)
+
+        if(inWishlist){
+            currentUser.dinner_wishlist.map((item) => (
+                item.recipe_id === recipeId
+            ))
+            handleRemoveFromWishlist(currentUser.id, item.recipe_id)
+        } else {
+            handleAddToWishlist(recipeDetails, recipeDetails.id)
+        }
+    }
+
+    const handleRemoveFromWishlist = (currentUserId, itemId) => {
+        dispatch(removeFromWishlist(currentUserId, itemId));
+    }
     
-    
-    function handleWishlist() {
+    const handleAddToWishlist = (recipeDetails, recipeId) => {
         dispatch(updateWishlist(recipeDetails, recipeId, lineByLineInstructions));
       }
+
+    
 
     function stripHtmlTags(html) {
         const div = document.createElement("div");
@@ -35,49 +53,14 @@ function RecipeData() {
         return numberedInstructions;
     }
 
-
-
-    // function handleWishlist() {
-    //     const userId = currentUser.id;
-
-        
-    //     fetch(`http://localhost:3000/update_user/`, {
-    //         method: "PATCH",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json',
-    //         },
-    //         credentials: 'include',
-    //         body: JSON.stringify({
-    //             user: {
-    //                 dinner_wishlist: [
-    //                     {
-    //                         title: recipeDetails.title, 
-    //                         ingredients: recipeDetails.extendedIngredients.map((ingredient) => ingredient.name),
-    //                         instructions: lineByLineInstructions(recipeDetails.instructions),
-    //                         recipe_id: recipeId,
-    //                     }
-    //                 ]
-    //             }
-    //         })
-    //     })
-    //         .then(response => {
-    //             if (response.ok) {
-    //                 console.log('Recipe added to wishlist');
-    //             } else {
-    //                 console.error('Error updating wishlist');
-    //             }
-    //         })
-    //         .catch(error => console.error('Error updating wishlist:', error));
-    // }
-
     return (
         <div>
             <div className='recipe-data-container'>
                 <h1>{recipeDetails.title}</h1>
                 <img src={recipeDetails.image} alt={recipeDetails.title} />
                 <br/>
-                <button onClick={handleWishlist}>Add to Wishlist</button>
+                <button onClick={handleToggleWishlist}>{inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}</button>
+                {/* <button onClick={handleAddToWishlist}>Add to Wishlist</button> */}
                 <p>{stripHtmlTags(recipeDetails.summary)}</p>
                 <div className='recipe-data-container'>
                     <h2>Ingredients</h2>

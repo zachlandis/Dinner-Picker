@@ -4,12 +4,11 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: lightblue;
   min-height: 100vh;
 }
 
 /* General Text and Section Styles */
-h1, h3, h5, .profile-header, .section-header {
+h3, h5, .section-header {
   color: #333;
   text-align: center;
 }
@@ -32,7 +31,7 @@ p {
   max-width: 100%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #f0eded;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -146,24 +145,85 @@ p {
 }
 
 /* Profile Page Styles */
-.edit-profile-link {
-  text-align: left;
+
+.random-menu-shopping-list-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 20px; 
+}
+
+.components-table {
+  border-collapse: separate;
+  border-spacing: 20px; 
+}
+
+.random-menu-shopping-list-container {
+  display: flexbox;
+}
+
+.shopping-list-container {
+  flex: 1;
+  padding: 0 10px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.randomized-menu-container {
+  flex: 1;
+  padding: 0 10px;
+  height: 300px;
 }
 
 
-.profile-table {
-  min-width: 100%;
-  justify-content: center;
+.component-cell {
+  padding: 10px;
+  border: 1px solid #ffffff;
 }
 
-.profile-cell {
-  border: solid black 1px;
+
+.profile-preferences {
+  width: 100%;
   text-align: left;
-  width: 50%;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.username-cell {
+  text-align: left;
+}
+
+.profile-header-table {
+  width: 100%; 
+}
+
+.edit-profile-cell {
+  text-align: right; 
 }
 
 .edit-profile-button {
   text-align: left;
+}
+
+.centered-content {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+.randomized-menu-table {
+  width: 100%;
+  justify-content: center;
+}
+
+.randomized-menu-item-columns {
+  text-align: right;
+  padding: 20px;
+  margin: 2px;
 }
 
 .random-trivia {
@@ -191,6 +251,14 @@ p {
 
 .dinner-wishlist-cell {
   text-align: right; 
+}
+
+
+/* ShoppingList */
+.wishlist-table-container {
+  overflow-y: scroll;
+  height: 300px;
+  text-align: left;
 }
 
 /* RecipeCollection Styles */

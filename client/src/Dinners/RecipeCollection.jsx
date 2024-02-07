@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecipes } from '../Redux/Actions/fetchRecipesActions';
 
 function RecipeCollection() {
+    const recipes = useSelector((state) => state.recipes.recipes)
     const [currentPage, setCurrentPage] = useState(1);
-    const currentUser = useSelector((state) => state.auth.currentUser);
-    const recipes = useSelector((state) => state.recipes.recipes); 
-
+    const resultsPerPage = 10;
+    const [totalPages, setTotalPages] = useState(0);
+    const currentUser = useSelector((state) => state.auth.currentUser)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchRecipes(currentUser, currentPage)); 
-    }, [currentUser, currentPage, dispatch]);
+        dispatch(fetchRecipes(currentUser, 1))
+    }, [currentUser, dispatch])
 
     useEffect(() => {
-        console.log(recipes)
+        console.log("CurrentUser from RecipeCollection", currentUser)
     })
 
     const loadMoreResults = () => {
-        if (currentPage < recipes.totalPages) {
+        if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
+
 
     return (
         <div>
@@ -39,7 +41,7 @@ function RecipeCollection() {
                     </tr>
                 </div>
             ))}
-            {currentPage < recipes.totalPages && (
+            {currentPage < totalPages && (
                 <button onClick={loadMoreResults}>Load More</button>
             )}
         </div>
