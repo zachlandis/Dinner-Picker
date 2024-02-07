@@ -2,24 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function RandomizedMenu({ currentUser }) {
-  const [randomizedMenu, setRandomizedMenu] = useState([]);
+function RandomizedMenu({ currentUser, generateRandomizedMenu, randomizedMenu }) {
+//   const [randomizedMenu, setRandomizedMenu] = useState([]);
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-  const generateRandomizedMenu = () => {
-    const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
-    setRandomizedMenu(shuffledDinners);
-    localStorage.setItem('randomizedMenu', JSON.stringify(shuffledDinners));
-  };
-
-  useEffect(() => {
-    const storedMenu = localStorage.getItem('randomizedMenu');
-    if (storedMenu) {
-      setRandomizedMenu(JSON.parse(storedMenu));
-    } else {
-      generateRandomizedMenu();
-    }
-  }, []); // Run once on component mount
+//   const generateRandomizedMenu = () => {
+//     const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
+//     setRandomizedMenu(shuffledDinners);
+//     localStorage.setItem('randomizedMenu', JSON.stringify(shuffledDinners));
+//   };
 
   return (
     <div className='centered-content'>

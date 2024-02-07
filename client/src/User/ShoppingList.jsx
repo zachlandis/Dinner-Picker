@@ -1,27 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
-import { useNavigate } from 'react-router';
 
-function ShoppingList() {
-  const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
+function ShoppingList({ randomizedMenu }) {
   const data = React.useMemo(() => {
-    if (currentUser && currentUser.dinner_wishlists) {
-      const ingredients = Array.from(new Set(
-        currentUser.dinner_wishlists.flatMap((wishlist) => {
-          try {
-            return JSON.parse(wishlist.ingredients);
-          } catch (error) {
-            console.error('Error parsing ingredients:', error);
-            return [];
-          }
-        })
-      ));
+    if (randomizedMenu) {
+      const ingredients = randomizedMenu.reduce((acc, dinner) => {
+        if (dinner.ingredients) {
+          acc.push(...JSON.parse(dinner.ingredients));
+        }
+        return acc;
+      }, []);
       return ingredients.map((ingredient, index) => ({ id: index, ingredient }));
     }
     return [];
-  }, [currentUser]);
+  }, [randomizedMenu]);
 
   const columns = React.useMemo(() => [
     {
