@@ -146,6 +146,41 @@ p {
 
 /* Profile Page Styles */
 
+.random-menu-shopping-list-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 20px; 
+}
+
+.components-table {
+  border-collapse: separate;
+  border-spacing: 20px; 
+}
+
+.random-menu-shopping-list-container {
+  display: flexbox;
+}
+
+.shopping-list-container {
+  flex: 1;
+  padding: 0 10px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.randomized-menu-container {
+  flex: 1;
+  padding: 0 10px;
+  height: 300px;
+}
+
+
+.component-cell {
+  padding: 10px;
+  border: 1px solid #ffffff;
+}
+
 
 .profile-preferences {
   width: 100%;
@@ -172,6 +207,7 @@ p {
 }
 
 .centered-content {
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -180,7 +216,7 @@ p {
 }
 
 .randomized-menu-table {
-  width: 45%;
+  width: 100%;
   justify-content: center;
 }
 
@@ -215,6 +251,14 @@ p {
 
 .dinner-wishlist-cell {
   text-align: right; 
+}
+
+
+/* ShoppingList */
+.wishlist-table-container {
+  overflow-y: scroll;
+  height: 300px;
+  text-align: left;
 }
 
 /* RecipeCollection Styles */

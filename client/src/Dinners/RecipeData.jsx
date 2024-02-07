@@ -60,7 +60,7 @@ function RecipeData() {
                 <img src={recipeDetails.image} alt={recipeDetails.title} />
                 <br/>
                 <button onClick={handleToggleWishlist}>{inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}</button>
-                <button onClick={handleAddToWishlist}>Add to Wishlist</button>
+                {/* <button onClick={handleAddToWishlist}>Add to Wishlist</button> */}
                 <p>{stripHtmlTags(recipeDetails.summary)}</p>
                 <div className='recipe-data-container'>
                     <h2>Ingredients</h2>

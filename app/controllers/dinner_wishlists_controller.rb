@@ -1,6 +1,6 @@
 class DinnerWishlistsController < ApplicationController
-    before_action :authenticate_user!
-    before_action :set_user, only: [:create, :destroy]
+    # before_action :authenticate_user!
+    before_action :set_user, only: [:index, :create, :show, :destroy]
     
   
     def index

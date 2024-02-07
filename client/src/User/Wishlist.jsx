@@ -1,12 +1,28 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'; 
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import { useNavigate } from 'react-router';
+import { fetchWishlist, removeFromWishlist } from "../Redux/Actions/wishlistActions.jsx";
 
-function Wishlist() {
+function Wishlist({ currentUser }) {
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
-  const data = React.useMemo(() => currentUser.dinner_wishlists, [currentUser.dinner_wishlists]);
+  const dispatch = useDispatch();
+  const [deletedItemId, setDeletedItemId] = useState(null);
+
+  const data = useSelector(state => state.wishlist.wishlist); 
+
+  useEffect(() => {
+    dispatch(fetchWishlist(currentUser.id));
+  }, [dispatch, currentUser.id]);
+
+  if (!data || !currentUser) {
+    return <div>Loading...</div>;
+  }
+
+  const removeItemFromWishlist = (itemId) => {
+    dispatch(removeFromWishlist(currentUser.id, itemId));
+    setDeletedItemId(itemId);
+  };
 
   const columns = React.useMemo(() => [
     {
@@ -27,20 +43,19 @@ function Wishlist() {
     },
     {
       Header: 'Actions',
-      id: 'actions', 
+      id: 'actions',
       Cell: ({ row }) => (
         <div className="remove-button-container dinner-wishlist-cell">
           <button
-            className="remove-button" 
+            className="remove-button"
             onClick={() => removeItemFromWishlist(row.original.id)}
           >
             Remove
           </button>
         </div>
       ),
-    }
-  ], [navigate]);
-
+    },
+  ], []);
 
   const {
     getTableProps,
@@ -90,7 +105,7 @@ function Wishlist() {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
-            return (
+            return deletedItemId === row.original.id ? null : (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
@@ -105,5 +120,6 @@ function Wishlist() {
     </div>
   );
 }
+
 
 export default Wishlist;
