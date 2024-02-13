@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Wishlist from './Wishlist';
 import { Link } from 'react-router-dom';
 import RandomizedMenu from './RandomizedMenu';
 import ShoppingList from './ShoppingList';
+import { fetchCurrentUser } from '../Redux/Actions/authActions';
 
 function Profile() {
+  const dispatch = useDispatch();
   const [foodTrivia, setFoodTrivia] = useState('');
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [randomizedMenu, setRandomizedMenu] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   useEffect(() => {
     const storedMenu = localStorage.getItem('randomizedMenu');
@@ -42,13 +48,13 @@ function Profile() {
       <br/>
       <div className='profile-preferences'>
         <div>
-          <strong>Diets: </strong>{currentUser?.dietary_restrictions.join(', ')}
+          <strong>Diets: </strong>{currentUser?.dietary_restrictions?.join(', ')}
         </div>
         <div>
-          <strong>Intolerances: </strong>{currentUser?.intolerances.join(', ')}
+          <strong>Intolerances: </strong>{currentUser?.intolerances?.join(', ')}
         </div>
         <div>
-          <strong>Preferred Cuisines: </strong>{currentUser?.preferredCuisines.join(', ')}
+          <strong>Preferred Cuisines: </strong>{currentUser?.preferredCuisines?.join(', ')}
         </div>
       </div>
       <br/>

@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeFromShoppingList } from '../Redux/Actions/shoppingListActions';
 
 function ShoppingList({ randomizedMenu }) {
   const [shoppingList, setShoppingList] = useState([]);
+  const dispatch = useDispatch();
 
-  useState(() => {
+  useEffect(() => {
     if (randomizedMenu && randomizedMenu.length) {
       const allIngredients = randomizedMenu.flatMap(dinner => JSON.parse(dinner.ingredients || '[]'));
       const uniqueIngredients = Array.from(new Set(allIngredients));
       setShoppingList(uniqueIngredients.map((ingredient, index) => ({ id: index, ingredient })));
     }
   }, [randomizedMenu]);
-
-  const dispatch = useDispatch();
 
   const handleRemove = (ingredientId) => {
     const updatedShoppingList = shoppingList.filter(item => item.id !== ingredientId);
