@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import { useNavigate } from 'react-router';
 import { fetchWishlist, removeFromWishlist } from "../Redux/Actions/wishlistActions.jsx";
 
 function Wishlist({ currentUser }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [deletedItemId, setDeletedItemId] = useState(null);
+  const [wishlist, setWishlist] = useState([]);
+  const [filteredWishlist, setFilteredWishlist] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [searchTerm, setSearchTerm] = useState('');
 
   const data = useSelector(state => state.wishlist.wishlist); 
 
@@ -15,66 +17,38 @@ function Wishlist({ currentUser }) {
     dispatch(fetchWishlist(currentUser.id));
   }, [dispatch, currentUser.id]);
 
-  if (!data || !currentUser) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    setWishlist(data || []);
+  }, [data]);
+
+  useEffect(() => {
+    const filtered = wishlist.filter(item =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredWishlist(filtered);
+  }, [wishlist, searchTerm]);
 
   const removeItemFromWishlist = (itemId) => {
     dispatch(removeFromWishlist(currentUser.id, itemId));
-    setDeletedItemId(itemId);
   };
 
-  const columns = React.useMemo(() => [
-    {
-      Header: 'Title',
-      accessor: 'title',
-      Cell: ({ row }) => (
-        <a
-          href="#"
-          className="recipe-title"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(`/recipe/${row.original.recipe_id}`);
-          }}
-        >
-          {row.values.title}
-        </a>
-      ),
-    },
-    {
-      Header: 'Actions',
-      id: 'actions',
-      Cell: ({ row }) => (
-        <div className="remove-button-container dinner-wishlist-cell">
-          <button
-            className="remove-button"
-            onClick={() => removeItemFromWishlist(row.original.id)}
-          >
-            Remove
-          </button>
-        </div>
-      ),
-    },
-  ], []);
+  const handleSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state,
-    setGlobalFilter,
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useGlobalFilter,
-    useSortBy
-  );
-
-  const { globalFilter } = state;
+  const sortedWishlist = filteredWishlist.sort((a, b) => {
+    if (a[sortConfig.key] < b[sortConfig.key]) {
+      return sortConfig.direction === 'asc' ? -1 : 1;
+    }
+    if (a[sortConfig.key] > b[sortConfig.key]) {
+      return sortConfig.direction === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
 
   return (
     <div className='centered-content'>
@@ -83,43 +57,52 @@ function Wishlist({ currentUser }) {
         <input
           type='text'
           placeholder='Search wishlist...'
-          value={globalFilter || ''}
-          onChange={(e) => setGlobalFilter(e.target.value)}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <table {...getTableProps()} className='wishlist-table'>
+      <table className='wishlist-table'>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                  </span>
-                </th>
-              ))}
+          <tr>
+            <th onClick={() => handleSort('title')}>
+              Title {sortConfig.key === 'title' && (
+                sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽'
+              )}
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedWishlist.map(item => (
+            <tr key={item.id}>
+              <td>
+                <a
+                  href="#"
+                  className="recipe-title"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(`/recipe/${item.recipe_id}`);
+                  }}
+                >
+                  {item.title}
+                </a>
+              </td>
+              <td>
+                <div className="remove-button-container dinner-wishlist-cell">
+                  <button
+                    className="remove-button"
+                    onClick={() => removeItemFromWishlist(item.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return deletedItemId === row.original.id ? null : (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  );
-                })}
-              </tr>
-            );
-          })}
         </tbody>
       </table>
     </div>
   );
 }
-
 
 export default Wishlist;
