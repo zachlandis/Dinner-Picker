@@ -16,18 +16,16 @@ export const fetchRecipesError = (error) => ({
 export const fetchRecipes = (currentUser, currentPage) => {
   return async (dispatch) => {
     const resultsPerPage = 10;
-    try {
-      const response = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?cuisine=${currentUser.preferredCuisines}&intolerances=${currentUser.intolerances}&diet=${currentUser.dietary_restrictions}&apiKey=9e18ededfa274d49bdaff560fc62a9c2&includeNutrition=true&includeIngredients&number=${resultsPerPage}&offset=${(currentPage - 1) * resultsPerPage}`
-      );
+    const response = await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?cuisine=${currentUser.preferredCuisines}&intolerances=${currentUser.intolerances}&diet=${currentUser.dietary_restrictions}&apiKey=9e18ededfa274d49bdaff560fc62a9c2&includeNutrition=true&includeIngredients&number=${resultsPerPage}&offset=${(currentPage - 1) * resultsPerPage}`
+    );
 
-      if (response.status === 200) {
-        const recipes = response.data.results;
-        dispatch(fetchRecipesSuccess(recipes));
-      }
-    } catch (error) {
-      console.error('Error fetching recipes:', error);
-      dispatch(fetchRecipesError(error.message));
+    if (response.status === 200) {
+      const recipes = response.data.results;
+      dispatch(fetchRecipesSuccess(recipes));
+    } else {
+      console.error('Error fetching recipes:', response.statusText);
+      dispatch(fetchRecipesError(response.statusText));
     }
   };
 };

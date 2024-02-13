@@ -10,11 +10,7 @@ function Logout() {
 
   useEffect(() => {
     const performLogout = async () => {
-      try {
-        await dispatch(userLogout());
-      } catch (error) {
-        console.error('Error during logout:', error);
-      }
+      await dispatch(userLogout());
     };
 
     if (currentUser) {
