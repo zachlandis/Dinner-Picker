@@ -64,10 +64,8 @@ export const updateWishlist = (recipeDetails, recipeId, lineByLineInstructions) 
       if (response.ok) {
         const updatedWishlistData = await response.json();
         dispatch({ type: UPDATE_WISHLIST_SUCCESS, updatedWishlist: updatedWishlistData });
-        console.log('Recipe added to wishlist');
       } else {
         dispatch({ type: UPDATE_WISHLIST_FAILURE });
-        console.error('Error updating wishlist');
       }
     } catch (error) {
       console.error('Error updating wishlist:', error);
@@ -95,7 +93,6 @@ export const removeFromWishlist = (userId, itemId) => {
 
       if (response.ok) {
         dispatch({ type: REMOVE_FROM_WISHLIST_SUCCESS, itemId });
-        console.log('Recipe removed from wishlist');
       } else {
         dispatch({ type: REMOVE_FROM_WISHLIST_FAILURE });
         console.error('Error removing recipe from wishlist', itemId);

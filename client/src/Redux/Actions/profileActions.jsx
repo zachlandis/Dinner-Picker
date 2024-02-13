@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { fetchCurrentUser } from './authActions'; // Import the fetchCurrentUser action
+import { fetchCurrentUser } from './authActions';
 
 
 export const UPDATE_PROFILE_OPTIONS_REQUEST = 'UPDATE_PROFILE_OPTIONS_REQUEST';
@@ -31,10 +31,9 @@ export const updateProfileOptions = (profileData, navigate) => {
       });
 
       if (response.status === 200) {
-        console.log('Update successful');
         dispatch(updateProfileOptionsSuccess());
-        dispatch(fetchCurrentUser()); // Dispatch action to update currentUser
-        navigate('/profile'); // Navigate back to profile page
+        dispatch(fetchCurrentUser()); 
+        navigate('/profile'); 
       } else {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

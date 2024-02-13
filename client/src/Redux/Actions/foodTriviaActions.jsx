@@ -1,8 +1,6 @@
-// actions/foodTriviaActions.js
-
 import axios from 'axios';
 
-// Action Types for Food Trivia
+
 export const FETCH_FOOD_TRIVIA_SUCCESS = 'FETCH_FOOD_TRIVIA_SUCCESS';
 export const FETCH_FOOD_TRIVIA_ERROR = 'FETCH_FOOD_TRIVIA_ERROR';
 

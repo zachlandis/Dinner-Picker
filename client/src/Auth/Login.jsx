@@ -12,7 +12,6 @@ function Login() {
     
     useEffect(() => {
         if (currentUser) {
-          console.log("From Login:", currentUser);
           if (currentUser.sign_in_count === 2) {
             navigate('/edit-profile');
           } else {
@@ -30,7 +29,6 @@ function Login() {
         }
         
         dispatch(userLogin(loginData))
-        console.log("From Login:", currentUser)
         if (currentUser.sign_in_count === 2) {
             await navigate('/edit-profile'); 
           } else {

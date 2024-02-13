@@ -5,7 +5,6 @@ import { removeFromShoppingList } from '../Redux/Actions/shoppingListActions';
 function ShoppingList({ randomizedMenu }) {
   const [shoppingList, setShoppingList] = useState([]);
 
-  // Populate the shopping list from the randomizedMenu prop when it changes
   useState(() => {
     if (randomizedMenu && randomizedMenu.length) {
       const allIngredients = randomizedMenu.flatMap(dinner => JSON.parse(dinner.ingredients || '[]'));
@@ -17,10 +16,8 @@ function ShoppingList({ randomizedMenu }) {
   const dispatch = useDispatch();
 
   const handleRemove = (ingredientId) => {
-    // Remove the item from the shopping list
     const updatedShoppingList = shoppingList.filter(item => item.id !== ingredientId);
     setShoppingList(updatedShoppingList);
-    // Dispatch an action to update the global state in Redux
     dispatch(removeFromShoppingList(ingredientId));
   };
 

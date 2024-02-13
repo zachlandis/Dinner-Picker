@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// New User Registration
 export const registerUser = (userData) => {
   return async (dispatch) => {
     try {
@@ -14,7 +13,6 @@ export const registerUser = (userData) => {
   };
 };
 
-// User login
 export const userLogin = (loginData) => {
   return async (dispatch) => {
     try {
@@ -24,7 +22,6 @@ export const userLogin = (loginData) => {
         withCredentials: true, 
       });
       dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
-      console.log("login successful");
       await dispatch(fetchCurrentUser());
     } catch (error) {
       dispatch({ type: 'LOGIN_ERROR', payload: error.message });
@@ -32,7 +29,6 @@ export const userLogin = (loginData) => {
   };
 };
 
-// Fetch current user data
 export const fetchCurrentUser = () => {
   return async (dispatch) => {
     try {
@@ -54,8 +50,6 @@ export const fetchCurrentUser = () => {
   };
 };
 
-
-// User Logout
 export const userLogout = () => {
   return async (dispatch) => {
     try {

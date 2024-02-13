@@ -15,10 +15,6 @@ function RecipeCollection() {
         dispatch(fetchRecipes(currentUser, 1))
     }, [currentUser, dispatch])
 
-    useEffect(() => {
-        console.log("CurrentUser from RecipeCollection", currentUser)
-    })
-
     const loadMoreResults = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);

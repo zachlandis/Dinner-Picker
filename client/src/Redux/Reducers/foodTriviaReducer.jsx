@@ -1,5 +1,3 @@
-// reducers/foodTriviaReducer.js
-
 import { FETCH_FOOD_TRIVIA_SUCCESS, FETCH_FOOD_TRIVIA_ERROR } from '../Actions/foodTriviaActions';
 
 const initialFoodTriviaState = {

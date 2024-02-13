@@ -31,9 +31,7 @@ function Profile() {
 
   return (
     <div className="profile-page">
-      {/* Profile header and preferences */}
       <div>
-        {/* Profile header */}
         <table className='profile-header-table'>
           <tr>
             <td className='username-cell'><h1>{currentUser?.username || 'User'}</h1></td>
@@ -55,18 +53,15 @@ function Profile() {
       </div>
       <br/>
       <div className='random-menu-shopping-list-container'>
-        {/* Randomized menu and shopping list */}
         <table className='components-table'>
           <tbody>
             <tr>
               <td className='component-cell'>
-                {/* Randomized menu */}
                 <div className='randomized-menu-container'>
                   <RandomizedMenu currentUser={currentUser} generateRandomizedMenu={generateRandomizedMenu} randomizedMenu={randomizedMenu} />
                 </div>
               </td>
               <td className='component-cell'>
-                {/* Shopping list */}
                 <div className='shopping-list-container'>
                   <ShoppingList randomizedMenu={randomizedMenu}/>
                 </div>
@@ -75,10 +70,8 @@ function Profile() {
           </tbody>
         </table>
       </div>
-      {/* Food trivia */}
       <div className="random-trivia">{foodTrivia}</div>
       <br/>
-      {/* User wishlist */}
       <div className='profile-preferences'>
         <Wishlist currentUser={currentUser} />
       </div>
