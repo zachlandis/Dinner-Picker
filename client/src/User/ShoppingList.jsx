@@ -1,60 +1,24 @@
-import React from 'react';
-import { useTable, useGlobalFilter, useSortBy } from 'react-table';
+import React, { useMemo, useState } from 'react';
 
 function ShoppingList({ randomizedMenu }) {
-  const data = React.useMemo(() => {
-    if (randomizedMenu) {
-      const ingredients = randomizedMenu.reduce((acc, dinner) => {
-        if (dinner.ingredients) {
-          acc.push(...JSON.parse(dinner.ingredients));
-        }
-        return acc;
-      }, []);
-      const uniqueIngredients = [...new Set(ingredients)];
-      return uniqueIngredients.sort().map((ingredient, index) => ({ id: index, ingredient }));
-    }
-    return [];
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const ingredients = useMemo(() => {
+    if (!randomizedMenu) return [];
+    const allIngredients = randomizedMenu.flatMap(dinner => JSON.parse(dinner.ingredients || '[]'));
+    const uniqueIngredients = Array.from(new Set(allIngredients));
+    return uniqueIngredients.sort().map((ingredient, index) => ({ id: index, ingredient }));
   }, [randomizedMenu]);
 
-  const columns = React.useMemo(() => [
-    {
-      Header: 'Ingredient',
-      accessor: 'ingredient',
-    },
-    {
-      Header: 'Remove',
-      id: 'remove',
-      Cell: ({ row }) => (
-        <div className="remove-button-container">
-          <button
-            className="remove-button"
-            onClick={() => console.log(`Remove ${row.original.ingredient} from Shopping List`)}
-          >
-            Remove
-          </button>
-        </div>
-      ),
-    }
-  ], []);
+  const filteredIngredients = useMemo(() => {
+    if (!searchTerm.trim()) return ingredients;
+    const lowerCaseSearch = searchTerm.trim().toLowerCase();
+    return ingredients.filter(ingredient => ingredient.ingredient.toLowerCase().includes(lowerCaseSearch));
+  }, [ingredients, searchTerm]);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state,
-    setGlobalFilter,
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useGlobalFilter,
-    useSortBy
-  );
-
-  const { globalFilter } = state;
+  const handleRemove = (ingredient) => {
+    console.log(`Remove ${ingredient} from Shopping List`);
+  };
 
   return (
     <div className='centered-content'>
@@ -63,39 +27,34 @@ function ShoppingList({ randomizedMenu }) {
         <input
           type='text'
           placeholder='Search ingredients...'
-          value={globalFilter || ''}
-          onChange={(e) => setGlobalFilter(e.target.value)}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
       <div className='wishlist-table-container'>
-        <table {...getTableProps()} className='wishlist-table'>
+        <table className='wishlist-table'>
           <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}
-                    <span>
-                      {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                    </span>
-                  </th>
-                ))}
+            <tr>
+              <th>Ingredient</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredIngredients.map((ingredient) => (
+              <tr key={ingredient.id}>
+                <td>{ingredient.ingredient}</td>
+                <td>
+                  <div className="remove-button-container">
+                    <button
+                      className="remove-button"
+                      onClick={() => handleRemove(ingredient.ingredient)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
           </tbody>
         </table>
       </div>
