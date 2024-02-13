@@ -19,20 +19,11 @@ function Profile() {
     }
   }, []); 
 
-  
   const generateRandomizedMenu = () => {
     const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
     setRandomizedMenu(shuffledDinners);
     localStorage.setItem('randomizedMenu', JSON.stringify(shuffledDinners));
   };
-
-  const listItems = (items) => {
-    return items.join(', ');
-  };
-
-  const mappedIntolerances = listItems(currentUser?.intolerances || []);
-  const mappedPreferredCuisines = listItems(currentUser?.preferredCuisines || []);
-  const mapppedDiets = listItems(currentUser?.dietary_restrictions || []);
 
   if (!currentUser) {
     return <h1>Loading...</h1>;
@@ -40,7 +31,9 @@ function Profile() {
 
   return (
     <div className="profile-page">
+      {/* Profile header and preferences */}
       <div>
+        {/* Profile header */}
         <table className='profile-header-table'>
           <tr>
             <td className='username-cell'><h1>{currentUser?.username || 'User'}</h1></td>
@@ -51,29 +44,29 @@ function Profile() {
       <br/>
       <div className='profile-preferences'>
         <div>
-            <strong>Diets: </strong>
-            {mapppedDiets}
+          <strong>Diets: </strong>{currentUser?.dietary_restrictions.join(', ')}
         </div>
         <div>
-            <strong>Intolerances: </strong>
-            {mappedIntolerances}
+          <strong>Intolerances: </strong>{currentUser?.intolerances.join(', ')}
         </div>
         <div>
-            <strong>Preferred Cuisines: </strong>
-            {mappedPreferredCuisines}
+          <strong>Preferred Cuisines: </strong>{currentUser?.preferredCuisines.join(', ')}
         </div>
       </div>
       <br/>
       <div className='random-menu-shopping-list-container'>
+        {/* Randomized menu and shopping list */}
         <table className='components-table'>
           <tbody>
             <tr>
               <td className='component-cell'>
+                {/* Randomized menu */}
                 <div className='randomized-menu-container'>
                   <RandomizedMenu currentUser={currentUser} generateRandomizedMenu={generateRandomizedMenu} randomizedMenu={randomizedMenu} />
                 </div>
               </td>
               <td className='component-cell'>
+                {/* Shopping list */}
                 <div className='shopping-list-container'>
                   <ShoppingList randomizedMenu={randomizedMenu}/>
                 </div>
@@ -82,8 +75,10 @@ function Profile() {
           </tbody>
         </table>
       </div>
+      {/* Food trivia */}
       <div className="random-trivia">{foodTrivia}</div>
       <br/>
+      {/* User wishlist */}
       <div className='profile-preferences'>
         <Wishlist currentUser={currentUser} />
       </div>
