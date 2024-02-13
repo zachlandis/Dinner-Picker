@@ -61,46 +61,48 @@ function Wishlist({ currentUser }) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <table className='wishlist-table'>
-        <thead>
-          <tr>
-            <th onClick={() => handleSort('title')}>
-              Title {sortConfig.key === 'title' && (
-                sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽'
-              )}
-            </th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedWishlist.map(item => (
-            <tr key={item.id}>
-              <td>
-                <a
-                  href="#"
-                  className="recipe-title"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate(`/recipe/${item.recipe_id}`);
-                  }}
-                >
-                  {item.title}
-                </a>
-              </td>
-              <td>
-                <div className="remove-button-container dinner-wishlist-cell">
-                  <button
-                    className="remove-button"
-                    onClick={() => removeItemFromWishlist(item.id)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </td>
+      <div className='wishlist-container'>
+        <table className='wishlist-table'>
+          <thead>
+            <tr>
+              <th onClick={() => handleSort('title')}>
+                Title {sortConfig.key === 'title' && (
+                  sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽'
+                )}
+              </th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedWishlist.map(item => (
+              <tr key={item.id}>
+                <td>
+                  <a
+                    href="#"
+                    className="recipe-title"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate(`/recipe/${item.recipe_id}`);
+                    }}
+                  >
+                    {item.title}
+                  </a>
+                </td>
+                <td>
+                  <div className="remove-button-container dinner-wishlist-cell">
+                    <button
+                      className="remove-button"
+                      onClick={() => removeItemFromWishlist(item.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

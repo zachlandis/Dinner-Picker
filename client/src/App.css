@@ -232,6 +232,8 @@ p {
 
 .wishlist-container {
   text-align: left;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .wishlist-item {
@@ -288,10 +290,10 @@ p {
 
 /* RecipeData Styles */
 .recipe-ingredients ul {
-  border: 1px solid black;
+  background-color: darkgray;
   text-align: left;
 }
 
 .recipe-data-container {
-  border: 1px solid limegreen;
+  background-color: lightgray;
 }
