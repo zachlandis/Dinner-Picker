@@ -1,29 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
 # Dinner Picker
 
 Dinner Picker is an application designed to make meal planning easier and more enjoyable. With a vast database of recipes, dietary options, and user preferences, Dinner Picker helps you discover new dishes, create randomized menus, and generate shopping lists effortlessly.
@@ -57,6 +31,8 @@ To use Dinner Picker, follow these steps:
 
 4. Set up the backend server:
 
+    rails db:create
+    rails db:migrate
     rails s
 
 5. Start the frontend development server:
