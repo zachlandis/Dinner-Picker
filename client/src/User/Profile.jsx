@@ -68,7 +68,7 @@ function Profile() {
                 </div>
               </td>
               <td className='component-cell'>
-                <div className='shopping-list-container'>
+                <div>
                   <ShoppingList randomizedMenu={randomizedMenu}/>
                 </div>
               </td>

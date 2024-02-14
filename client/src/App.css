@@ -26,9 +26,9 @@ p {
 }
 
 /* Form and Input Styles */
-.build-profile, .profile-page, .profile-form {
+.profile-page, .profile-form {
   font-family: Arial, sans-serif;
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   background-color: #f0eded;
@@ -69,7 +69,7 @@ p {
 .navbar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
-  background-color: #333;
+  background-color: #FF6F61;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -296,4 +296,14 @@ p {
 
 .recipe-data-container {
   background-color: lightgray;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #FF6F61; 
+  border-radius: 4px;
 }

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRecipeDetails } from '../Redux/Actions/fetchRecipeDetailActions';
-import { updateWishlist } from '../Redux/Actions/wishlistActions';
-import { removeFromWishlist } from '../Redux/Actions/wishlistActions';
+import { updateWishlist, removeFromWishlist } from '../Redux/Actions/wishlistActions';
 
 function RecipeData() {
     const { recipeId } = useParams();
@@ -60,7 +59,6 @@ function RecipeData() {
                 <img src={recipeDetails.image} alt={recipeDetails.title} />
                 <br/>
                 <button onClick={handleToggleWishlist}>{inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}</button>
-                {/* <button onClick={handleAddToWishlist}>Add to Wishlist</button> */}
                 <p>{stripHtmlTags(recipeDetails.summary)}</p>
                 <div className='recipe-data-container'>
                     <h2>Ingredients</h2>

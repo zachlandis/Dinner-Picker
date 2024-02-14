@@ -21,10 +21,10 @@ function ShoppingList({ randomizedMenu }) {
   };
 
   return (
-    <div className='centered-content'>
+    <div>
       <h3>Shopping List</h3>
       <div className='wishlist-table-container'>
-        <table className='wishlist-table'>
+        <table>
           <thead>
             <tr>
               <th>Ingredient</th>
