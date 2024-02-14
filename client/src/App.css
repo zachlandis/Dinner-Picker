@@ -226,6 +226,13 @@ p {
   margin: 2px;
 }
 
+.create-wishlist-notification {
+  text-align: center;
+  justify-content: center;
+  max-width: 400px; 
+  word-wrap: break-word; 
+}
+
 .random-trivia {
   border: solid black 1px;
 }

@@ -67,20 +67,23 @@ function Profile() {
             <tr>
               <td className='component-cell'>
                 <div className='randomized-menu-container'>
-                  <RandomizedMenu currentUser={currentUser} generateRandomizedMenu={generateRandomizedMenu} randomizedMenu={randomizedMenu} />
+                  <RandomizedMenu generateRandomizedMenu={generateRandomizedMenu} randomizedMenu={randomizedMenu} />
                 </div>
               </td>
+              {randomizedMenu.length > 0 ?
               <td className='component-cell'>
                 <div>
                   <ShoppingList randomizedMenu={randomizedMenu}/>
                 </div>
               </td>
+              : null}
             </tr>
           </tbody>
         </table>
       </div>
       <div className="random-trivia">{foodTrivia}</div>
       <br/>
+      
       <div className='profile-preferences'>
         <Wishlist currentUser={currentUser} />
       </div>
