@@ -1,19 +1,24 @@
 Rails.application.routes.draw do
+  # Devise routes for user authentication
   devise_for :users, controllers: {
-  sessions: 'users/sessions',
-  registrations: 'users/registrations'
-}
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
 
-resources :dinner_wishlists, only: [:index, :create, :show, :update, :destroy]
+  devise_scope :user do
+    get '/login', to: 'devise/sessions#new'
+    # Other Devise routes
+  end 
 
-# Route for fetching a user's dinner wishlists
-resources :users do
-  resources :dinner_wishlists, only: [:index]  # Assuming you only need index action
-end
+  # Other resources routes
+  resources :dinner_wishlists, only: [:index, :create, :show, :update, :destroy]
 
-  # resource :users
-  get '/users', to: 'users#index'
-  
+  # Route for fetching a user's dinner wishlists
+  resources :users do
+    resources :dinner_wishlists, only: [:index]  # Assuming you only need index action
+  end 
+
+  # Routes for user-related actions
   get '/current_user', to: 'users#current'
   patch '/update_user', to: 'users#update' 
 

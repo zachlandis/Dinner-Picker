@@ -12,14 +12,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-
+  
     resource.save
     yield resource if block_given?
-
+  
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        render json: { user: resource.as_json(except: [:encrypted_password]) }, status: :created
+        redirect_to '/login'
       else
         expire_data_after_sign_in!
         render json: { message: "signed up but #{resource.inactive_message}" }, status: :ok
@@ -30,6 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
     end
   end
+  
 
   
   # GET /resource/edit

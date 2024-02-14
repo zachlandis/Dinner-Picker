@@ -13,7 +13,7 @@ function SignUp() {
   const navigate = useNavigate();
   const authError = useSelector((state) => state.auth.error);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     const userData = {
@@ -22,8 +22,8 @@ function SignUp() {
       password,
       password_confirmation: passwordConfirmation,
     };
+    await dispatch(registerUser(userData));
     navigate('/login')
-    dispatch(registerUser(userData));
 
   };
 

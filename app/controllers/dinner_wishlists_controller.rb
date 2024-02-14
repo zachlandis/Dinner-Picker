@@ -1,10 +1,10 @@
 class DinnerWishlistsController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
     before_action :set_user, only: [:index, :create, :show, :destroy]
     
   
     def index
-        @wishlists = DinnerWishlist.all
+        @wishlists = @user.dinner_wishlists
         render json: @wishlists
     end
   

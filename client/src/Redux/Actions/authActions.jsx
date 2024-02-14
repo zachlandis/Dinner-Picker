@@ -2,41 +2,57 @@ import axios from 'axios';
 
 export const registerUser = (userData) => {
   return async (dispatch) => {
-    const response = await axios.post('http://localhost:3000/users', {
-      user: userData,
-    });
-    dispatch({ type: 'REGISTER_SUCCESS', payload: response.data });
+    try {
+      const response = await axios.post('http://localhost:3000/users', {
+        user: userData,
+      });
+      dispatch({ type: 'REGISTER_SUCCESS', payload: response.data });
+      await dispatch(fetchCurrentUser());
+      navigate('/login');
+    } catch (error) {
+      dispatch({ type: 'REGISTER_ERROR', payload: error.message });
+    }
   };
 };
 
 export const userLogin = (loginData) => {
   return async (dispatch) => {
-    const response = await axios.post('http://localhost:3000/users/sign_in', {
-      user: loginData,
-    }, {
-      withCredentials: true, 
-    });
-    dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
-    await dispatch(fetchCurrentUser());
+    try {
+      const response = await axios.post('http://localhost:3000/users/sign_in', {
+        user: loginData,
+      }, {
+        withCredentials: true, 
+      });
+      dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
+      await dispatch(fetchCurrentUser());
+      navigate('/login');
+    } catch (error) {
+      dispatch({ type: 'LOGIN_ERROR', payload: error.message });
+    }
   };
 };
 
 export const fetchCurrentUser = () => {
   return async (dispatch) => {
-    const response = await axios.get('http://localhost:3000/current_user', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      withCredentials: true, 
-    });
+    try {
+      const response = await axios.get('http://localhost:3000/current_user', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        withCredentials: true, 
+      });
 
-    if (response.status === 200) {
-      const user = response.data;
-      dispatch({ type: 'FETCH_CURRENT_USER_SUCCESS', payload: user });
+      if (response.status === 200) {
+        const user = response.data;
+        dispatch({ type: 'FETCH_CURRENT_USER_SUCCESS', payload: user });
+      }
+    } catch (error) {
+      dispatch({ type: 'FETCH_CURRENT_USER_ERROR', payload: error.message });
     }
   };
 };
+
 
 export const userLogout = () => {
   return async (dispatch) => {

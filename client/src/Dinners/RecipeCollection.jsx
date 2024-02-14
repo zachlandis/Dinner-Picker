@@ -23,7 +23,7 @@ function RecipeCollection() {
     };
 
     return (
-        <div>
+        <div className='recipe-collection'>
             {recipes.map((recipe, index) => (
                 <div key={index} className="recipe-row">
                     <tr>
@@ -32,14 +32,16 @@ function RecipeCollection() {
                         </td>
                         <td>
                             <h3 className='recipe-header'>{recipe.title}</h3>
-                            <Link to={`/recipe/${recipe.id}`}>See Recipe Info</Link>
+                            <h3><strong><Link to={`/recipe/${recipe.id}`}>See Recipe Info</Link></strong></h3>
                         </td>
                     </tr>
                 </div>
             ))}
-            {recipes.length > 0 && (
-                <button onClick={loadMoreResults}>Load More</button>
-            )}
+            <div className='recipe-pages-footer'>    
+                {recipes.length > 0 && (
+                    <button onClick={loadMoreResults}>Next Page</button>
+                )}
+            </div>
         </div>
     );
 }

@@ -25,10 +25,13 @@ function Profile() {
     }
   }, []); 
 
+
   const generateRandomizedMenu = () => {
-    const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
-    setRandomizedMenu(shuffledDinners);
-    localStorage.setItem('randomizedMenu', JSON.stringify(shuffledDinners));
+    if (currentUser?.dinner_wishlists?.length > 0) {
+      const shuffledDinners = [...currentUser.dinner_wishlists].sort(() => Math.random() - 0.5).slice(0, 7);
+      setRandomizedMenu(shuffledDinners);
+      localStorage.setItem('randomizedMenu', JSON.stringify(shuffledDinners));
+    }
   };
 
   if (!currentUser) {

@@ -264,8 +264,21 @@ p {
 }
 
 /* RecipeCollection Styles */
+.recipe-collection {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+}
+
 .recipe-row {
-  border: #333;
+  border: solid 3px white;
+  background-color: lightgray;
+}
+
+.recipe-row a {
+  color: #FF6F61;
+  width: 100%;
 }
 
 .recipe-image-cell, .recipe-info-cell {
@@ -285,6 +298,18 @@ p {
 
 .recipe-info-cell {
   padding-left: 20px; 
+}
+
+.recipe-pages-footer {
+  background-color: black;
+  height: 100px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-pages-footer button {
+  background-color: #FF6F61; 
 }
 
 
