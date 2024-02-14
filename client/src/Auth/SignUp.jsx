@@ -11,7 +11,6 @@ function SignUp() {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authError = useSelector((state) => state.auth.error);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -28,9 +27,10 @@ function SignUp() {
   };
 
   return (
-    <div className="profile-form">
-      <form onSubmit={handleRegister}>
+    <div className='signup-page'>
+      <form onSubmit={handleRegister} lassName="signup-form">
         <input
+            className="signup-input"
             type='email'
             name='email'
             placeholder='Email'
@@ -39,6 +39,7 @@ function SignUp() {
         />
         <br/>
         <input
+          className="signup-input"
           type='text'
           name='username'
           placeholder='Username'
@@ -47,6 +48,7 @@ function SignUp() {
         />
         <br/>
         <input
+            className="signup-input"
             type='password'
             name='password'
             placeholder='Password'
@@ -55,6 +57,7 @@ function SignUp() {
         />
         <br/>
         <input
+            className="signup-input"
             type='password'
             name='password_confirmation'
             placeholder='Confirm Password'
@@ -62,8 +65,7 @@ function SignUp() {
             onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
         <br/>
-        <input type='submit' value='sign-up'/>
-        {authError && <p className="error-message">{authError}</p>}
+        <input type='submit' value='Sign Up' className="signup-button"/>
       </form>
     </div>
   );

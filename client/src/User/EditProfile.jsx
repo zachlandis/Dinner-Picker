@@ -1,24 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileOptions } from '../Redux/Actions/profileActions.jsx'; 
 import { diets, intolerances, preferredCuisines } from './profileOptions';
-import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router';
 
 function EditProfile() {
   const [profileIntolerances, setProfileIntolerances] = useState([]);
   const [profileDiets, setProfileDiets] = useState([]);
   const [profilePreferredCuisines, setProfilePreferredCuisines] = useState([]);
-  const { currentUser } = useContext(UserContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const updateSuccess = useSelector((state) => state.profile.updateSuccess);
-
-  useEffect(() => {
-    if (updateSuccess) {
-      navigate('/profile');
-    }
-  }, [updateSuccess, navigate]);
 
   const handleCheckboxChange = (option, setterFunction, currentState) => {
     const currentIndex = currentState.indexOf(option);
@@ -41,6 +32,7 @@ function EditProfile() {
     };
 
     dispatch(updateProfileOptions(profileData, navigate));
+    navigate('/profile');
   };
 
   const mappedOptions = (options, setterFunction, currentState) => {

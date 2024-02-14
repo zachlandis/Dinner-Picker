@@ -11,9 +11,11 @@ function Navbar() {
     <nav className='navbar'>
       <div className='nav-container'>
         <div className='app-name'>Dinner Picker</div>
-        <div className='recipes-link'>
-          <Link to="/recipes">Recipes</Link>
-        </div>
+        {currentUser && Object.keys(currentUser).length !== 0 ? (
+          <div className='recipes-link'>
+            <Link to="/recipes">Recipes</Link>
+          </div>
+          ) : null }
         <div className='user-dropdown'>
           {currentUser && Object.keys(currentUser).length !== 0 ? (
             <div className='dropdown'>

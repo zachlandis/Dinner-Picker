@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { removeFromShoppingList } from '../Redux/Actions/shoppingListActions';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromShoppingList, setShoppingList } from '../Redux/Actions/shoppingListActions';
 
 function ShoppingList({ randomizedMenu }) {
-  const [shoppingList, setShoppingList] = useState([]);
   const dispatch = useDispatch();
+  const shoppingList = useSelector(state => state.shoppingList.shoppingListItems);
 
   useEffect(() => {
-    if (randomizedMenu && randomizedMenu.length) {
+    // Check if there's any data stored in localStorage for the shopping list
+    const storedShoppingList = JSON.parse(localStorage.getItem('shoppingList'));
+    if (storedShoppingList && storedShoppingList.length > 0) {
+      dispatch(setShoppingList(storedShoppingList)); // Populate from localStorage
+    } else if (randomizedMenu && randomizedMenu.length) {
+      // Populate from randomizedMenu if localStorage is empty
       const allIngredients = randomizedMenu.flatMap(dinner => JSON.parse(dinner.ingredients || '[]'));
       const uniqueIngredients = Array.from(new Set(allIngredients));
-      setShoppingList(uniqueIngredients.map((ingredient, index) => ({ id: index, ingredient })));
+      dispatch(setShoppingList(uniqueIngredients));
     }
-  }, [randomizedMenu]);
+  }, [randomizedMenu, dispatch]);
 
   const handleRemove = (ingredientId) => {
-    const updatedShoppingList = shoppingList.filter(item => item.id !== ingredientId);
-    setShoppingList(updatedShoppingList);
     dispatch(removeFromShoppingList(ingredientId));
   };
 

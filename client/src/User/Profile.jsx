@@ -8,13 +8,12 @@ import { fetchCurrentUser } from '../Redux/Actions/authActions';
 
 function Profile() {
   const dispatch = useDispatch();
-  const [foodTrivia, setFoodTrivia] = useState('');
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [randomizedMenu, setRandomizedMenu] = useState([]);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     const storedMenu = localStorage.getItem('randomizedMenu');
@@ -67,10 +66,10 @@ function Profile() {
             <tr>
               <td className='component-cell'>
                 <div className='randomized-menu-container'>
-                  <RandomizedMenu generateRandomizedMenu={generateRandomizedMenu} randomizedMenu={randomizedMenu} />
+                  <RandomizedMenu currentUser={currentUser} generateRandomizedMenu={generateRandomizedMenu} randomizedMenu={randomizedMenu} />
                 </div>
               </td>
-              {randomizedMenu.length > 0 ?
+              {currentUser.dinner_wishlists.length > 0 ?
               <td className='component-cell'>
                 <div>
                   <ShoppingList randomizedMenu={randomizedMenu}/>
@@ -81,9 +80,7 @@ function Profile() {
           </tbody>
         </table>
       </div>
-      <div className="random-trivia">{foodTrivia}</div>
       <br/>
-      
       <div className='profile-preferences'>
         <Wishlist currentUser={currentUser} />
       </div>

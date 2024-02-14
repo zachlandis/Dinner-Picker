@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function RandomizedMenu({ generateRandomizedMenu, randomizedMenu }) {
+function RandomizedMenu({ generateRandomizedMenu, randomizedMenu, currentUser }) {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   return (
     <div className='centered-content'>
-      {randomizedMenu.length > 0 ? 
+      {currentUser.dinner_wishlists.length > 0 ? 
       <div>
         <h3>This Week's Dinners</h3>
         <button onClick={generateRandomizedMenu}>Shuffle Menu</button>
